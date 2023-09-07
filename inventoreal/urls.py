@@ -22,4 +22,5 @@ urlpatterns = [
     path('main/', include('main.urls')), #Path URL 'main/' akan diarahkan ke rute yang didefinisikan dalam
                                         #berkas urls.py aplikasi main.
     path('admin/', admin.site.urls),
+    path('', include('main.urls')),
 ]
