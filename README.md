@@ -1,7 +1,17 @@
 # Inventoreal
 Tautan menuju aplikasi adaptable Inventoreal bisa diakses melalui [tautan ini](https://inventoreal.adaptable.app/).
 
-## *Jelaskan apakah itu MVC, MVT, MVVM dan perbedaan dari ketiganya*
+## **Cara membuat proyek Django baru**
+1. Buat direktori baru dengan nama sesuai keinginan (disarankan menggunakan nama aplikasi yang akan dibuat untuk memudahkan pekerjaan). Disini saya menggunakan nama **inventoreal** diikuti dengan membuka command prompt (windows) / terminal shell di dalamnya.
+1. Buat virtual environment dengan menuliskan perintah ```python -m venv env``` dengan tujuan mengisolasi proyek (python) kita, termasuk dependensinya, dari instalasi Python sistem atau proyek Python lainnya, dan aktifkan dengan perintah ```env\Scripts\activate.bat```.
+1. Kemudian, buatlah dependecies, yaitu modul yang diperlukan oleh suatu perangkat lunak untuk berfungsi (seperti library, framework, package, dan lainnya) dengan cara membuat `requirements.txt` di direktori tadi dan isi file tersebut dengan dependencies yang akan digunakan sesuai kebutuhan.
+1. Pasang dependencies dengan perintah ```pip install -r requirements.txt``` dan diikuti dengan membuat proyek Django dengan perintah ```django-admin startproject (nama app) .```. Untuk nama app, bisa disesuaikan dengan keinginan sendiri sehingga akan terbentuk sebuah folder baru dengan nama app yang dituliskan tadi.
+1. Di dalam folder baru tersebut, akses file settings.py, dan cari variabel bernama `ALLOWED_HOSTS`. Ubah nilai variabel tersebut menjadi `["*"]` yang nantinya akan berfungsi untuk mengizinkan akses dari semua host sehingga aplikasinya bisa diakses secara luas
+1. Pada command prompt/shell yang digunakan tadi, jalankan perintah ```python manage.py runserver``` (pastikan ada file `manage.py` di dalam direktori utama / direktori paling luar)
+1. Buka http://localhost:8000 pada browser yang biasa kalian pakai. Jika terlihat animasi roket, maka aplikasi Django yang dibuat sudah berhasil.
+1. Jika ingin menghentikan server, tekan `Ctrl+C` untuk command prompt atau `Control+C` untuk shell dan nonaktifkan virtual environment dengan perintah ```deactivate``` pada command prompt/shell kalian.
+
+## **Jelaskan apakah itu MVC, MVT, MVVM dan perbedaan dari ketiganya**
 MVC (Model-View-Controller), MVT (Model-View-Template) dan MVVM (Model-View-ViewModel) adalah pola arsitektur perangkat lunak yang digunakan dalam pengembangan aplikasi untuk memisahkan komponen aplikasi dari aplikasi yang berbeda agar lebih terstruktur dan sederhana. untuk mengelola. Meskipun  memiliki kesamaan dalam pembagian tugas, namun digunakan dalam konteks yang berbeda dan terdapat perbedaan dalam cara pengorganisasian komponen-komponen tersebut.
 
 ### MVC (Model - View - Controller)
