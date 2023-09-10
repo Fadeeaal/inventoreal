@@ -2,8 +2,6 @@
 Tautan menuju aplikasi adaptable Inventoreal bisa diakses melalui [tautan ini](https://inventoreal.adaptable.app/).
 
 ## **Cara membuat proyek Django baru**
-Tentu, berikut langkah-langkahnya dalam bentuk kalimat:
-
 1. Buat direktori baru dengan nama yang Anda inginkan, misalnya `inventoreal` dan buka command prompt (untuk Windows) atau terminal shell di dalam direktori tersebut.
 
 2. Buat virtual environment dengan perintah `python -m venv env` untuk mengisolasi proyek Python kita dan aktifkan virtual environment dengan perintah `env\Scripts\activate.bat` (Windows) atau `source env/bin/activate` (Linux/Mac).
@@ -22,18 +20,31 @@ Tentu, berikut langkah-langkahnya dalam bentuk kalimat:
 
 
 ## **Cara membuat aplikasi dengan nama `main` pada proyek**
-Tentu, berikut poin-poin tersebut yang telah dipadatkan:
-
 1. Buka command prompt pada direktori utama dan aktifkan virtual environment dengan perintah `env\Scripts\activate.bat`.
 
 2. Jalankan perintah `python manage.py startapp main` untuk membuat folder baru bernama `main`.
 
 3. Mendaftarkan aplikasi `main` ke proyek dengan membuka file `settings.py` dalam direktori proyek dan menambahkan `'main'` pada variabel `INSTALLED_APPS`.
 
-## **Melakukan routing pada proyek agar dapat menjalankan aplikasi main**
-## **Membuat model pada aplikasi main**
-## **Membuat sebuah routing pada urls.py aplikasi main untuk memetakan fungsi yang telah dibuat pada views.py**
+## **Melakukan routing pada proyek agar dapat menjalankan aplikasi `main`**
+## **Membuat model pada aplikasi `main`**
+## **Membuat sebuah routing pada `urls.py` aplikasi main untuk memetakan fungsi yang telah dibuat pada `views.py`**
 ## **Melakukan _deployment_ aplikasi ke Adaptable**
+1. Setelah login, pilih "New App" dan "Connect an Existing Repository".
+
+2. Hubungkan Adaptable.io dengan GitHub, pilih "All Repositories" (jika baru pertama kali menghubungkan).
+
+3. Pilih repositori proyek aplikasi yang telah diunggah ke github dan branch untuk _deployment_.
+
+4. Pilih template deployment "Python App Template" dan pilih PostgreSQL sebagai tipe basis data.
+
+6. Sesuaikan versi Python dengan yang dibutuhkan (cek menggunakan perintah `python --version` pada command prompt).
+
+7. Isi Start Command dengan `python manage.py migrate && gunicorn (nama direktori utama).wsgi`.
+
+8. Tentukan nama aplikasi yang juga akan menjadi nama domain situs web.
+
+9. Centang "HTTP Listener on PORT" dan klik "Deploy App" untuk memulai proses deployment aplikasi.
 
 ## **Jelaskan apakah itu MVC, MVT, MVVM dan perbedaan dari ketiganya**
 MVC (Model-View-Controller), MVT (Model-View-Template) dan MVVM (Model-View-ViewModel) adalah pola arsitektur perangkat lunak yang digunakan dalam pengembangan aplikasi untuk memisahkan komponen aplikasi dari aplikasi yang berbeda agar lebih terstruktur dan sederhana. untuk mengelola. Meskipun  memiliki kesamaan dalam pembagian tugas, namun digunakan dalam konteks yang berbeda dan terdapat perbedaan dalam cara pengorganisasian komponen-komponen tersebut.
