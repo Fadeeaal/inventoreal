@@ -18,6 +18,9 @@ Tautan menuju aplikasi adaptable Inventoreal bisa diakses melalui [tautan ini](h
 
 8. Untuk menghentikan server, cukup tekan `Ctrl+C` di command prompt atau terminal. Jangan lupa untuk nonaktifkan virtual environment dengan perintah `deactivate`.
 
+> [!NOTE]
+> Jika ingin mengunggah proyek ke github, disarankan membuat file `.gitignore` untuk menentukan berkas dan direktori yang harus diabaikan oleh Git.
+
 
 ## **Cara membuat aplikasi dengan nama `main` pada proyek**
 1. Buka command prompt pada direktori utama dan aktifkan virtual environment dengan perintah `env\Scripts\activate.bat`.
@@ -29,7 +32,7 @@ Tautan menuju aplikasi adaptable Inventoreal bisa diakses melalui [tautan ini](h
 
 ## **Cara membuat model pada aplikasi `main`**
 1. Buka file `models.py` dan isi file tersebut dengan nama `Item` dan atribut-atribut dan tipe data yang ingin digunakan. Dalam program ini, ada 3 atribut wajib (name, amount, description) dan 2 atribut tambahan (category, price).
-``` 
+``` python
 from django.db import models
 
 class Item(models.Model):
@@ -57,7 +60,7 @@ from django.shortcuts import render
 ```
 
 3. Buat fungsi `show_main` dengan 1 parameter (anggap namanya `request`) dan di dalam fungsinya, buat sebuah dictionary yang berisi data yang akan dikirimkan ke tampilan yang kemudian di return dengan fungsi `render` dengan 3 argumennya, yaitu `request` (objek permintaan HTTP yang dikirim oleh pengguna), nama file html yang digunakan untuk me-_render_ tampilan, dan `context` (dictionary yang berisi data untuk digunakan dalam penampilan dinamis)
-```
+```python
 def show_main(request):
     context = {
         'name': 'Rakha Fadil Atmojo',
@@ -72,13 +75,13 @@ def show_main(request):
 
 ## **Cara membuat sebuah routing pada urls.py aplikasi `main` untuk memetakan fungsi yang telah dibuat pada views.py**
 1. Buat file `urls.py` di dalam direktori `main` (jika belum ada) dan import modul path dari `django.urls` dan juga import views yang telah dibuat sebelumnya di `views.py`.
-```
+```python
 from django.urls import path
 from main.views import show_main
 ```
 
 2. Tambahkan urlpatterns untuk menghubungkan path dengan fungsi yang telah Anda buat di `views.py`, yaitu `show_main`
-```
+```python
 app_name = 'main'
 
 urlpatterns = [
@@ -91,7 +94,7 @@ urlpatterns = [
 1. Buka berkas `urls.py` di dalam direktori proyek `inventoreal` dan import modul `include` dari `django.urls` (`from django.urls import path, include`) untuk melakukan konfigurasi routing tampilan `main`
 
 2. Di dalam variabel urlpatterns, tambahkan path yang akan mengarahkan ke aplikasi 'main', bisa menggunakan `include()` untuk menghubungkan ke file `urls.py` di aplikasi 'main'.
-```
+```python
 urlpatterns = [
     path('main/', include('main.urls')), 
     path('admin/', admin.site.urls),
