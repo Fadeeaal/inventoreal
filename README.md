@@ -29,13 +29,16 @@ Tautan menuju aplikasi adaptable Inventoreal bisa diakses melalui [tautan ini](h
 ## **Melakukan routing pada proyek agar dapat menjalankan aplikasi `main`**
 
 ## **Membuat model pada aplikasi `main`**
-1. Buka file `models.py` dan isi file tersebut dengan nama `Item` dan atribut-atribut dan tipe data yang ingin digunakan
+1. Buka file `models.py` dan isi file tersebut dengan nama `Item` dan atribut-atribut dan tipe data yang ingin digunakan. Dalam program ini, ada 3 atribut wajib (name, amount, description) dan 2 atribut tambahan (category, price).
 ``` 
-name = models.CharField(max_length=255)
-category = models.CharField(max_length=255)
-price = models.IntegerField()
-amount = models.IntegerField()
-description = models.TextField()
+from django.db import models
+
+class Item(models.Model):
+    name = models.CharField(max_length=255)
+    category = models.CharField(max_length=255)
+    price = models.IntegerField()
+    amount = models.IntegerField()
+    description = models.TextField()
 ```
 
 2. Jalankan perintah `python manage.py makemigrations` untuk mempersiapkan migrasi skema model ke dalam database Django lokal.
