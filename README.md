@@ -27,7 +27,24 @@ Tautan menuju aplikasi adaptable Inventoreal bisa diakses melalui [tautan ini](h
 3. Mendaftarkan aplikasi `main` ke proyek dengan membuka file `settings.py` dalam direktori proyek dan menambahkan `'main'` pada variabel `INSTALLED_APPS`.
 
 ## **Melakukan routing pada proyek agar dapat menjalankan aplikasi `main`**
+
 ## **Membuat model pada aplikasi `main`**
+1. Buka file `models.py` dan isi file tersebut dengan nama `Item` dan atribut-atribut dan tipe data yang ingin digunakan
+``` 
+name = models.CharField(max_length=255)
+category = models.CharField(max_length=255)
+price = models.IntegerField()
+amount = models.IntegerField()
+description = models.TextField()
+```
+
+2. Jalankan perintah `python manage.py makemigrations` untuk mempersiapkan migrasi skema model ke dalam database Django lokal.
+
+3. Jalankan perintah `python manage.py migrate` untuk menerapkan skema model yang telah dibuat ke dalam database Django lokal.
+
+> [!IMPORTANT]
+> Setiap kali ada perubahan pada model (menambahkan / mengurangi / mengganti atribut), wajib untuk melakukan migrasi untuk merefleksikan perubahan itu
+
 ## **Membuat sebuah routing pada `urls.py` aplikasi main untuk memetakan fungsi yang telah dibuat pada `views.py`**
 ## **Melakukan _deployment_ aplikasi ke Adaptable**
 1. Setelah login, pilih "New App" dan "Connect an Existing Repository".
