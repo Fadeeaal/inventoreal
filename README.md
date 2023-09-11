@@ -72,7 +72,7 @@ def show_item(request):
         'category': 'Weapon',
         'price' : 1000,
         'amount' : 5,
-        'description' : 'The Diamond Sword is a legendary weapon known for its exceptional sharpness and stunning craftsmanship. Crafted from the world\'s most precious gem, it is a symbol of ultimate power, capable of effortlessly cutting through any obstacle or foe.'
+        'description' : 'A legendary weapon known for its exceptional sharpness and stunning craftsmanship. Crafted from the world\'s most precious gem, it is a symbol of ultimate power, capable of effortlessly cutting through any obstacle or foe.'
     }
 
     return render(request, "main.html", context)
