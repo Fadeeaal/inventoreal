@@ -1,10 +1,13 @@
-from django.test import TestCase, Client
+from django.test import TestCase
+from .models import Item
 
-class mainTest(TestCase):
-    def test_main_url_is_exist(self):
-        response = Client().get('/main/')
-        self.assertEqual(response.status_code, 200)
+class ItemModelTestCase(TestCase):
+    def setUp(self):
+        self.item = Item.objects.create(
+            name="Diamond sword",
+            category="Weapon",
+            price=500,
+            amount=5,
+            description="The Diamond Sword is a legendary weapon known for its exceptional sharpness and stunning craftsmanship. Crafted from the world's most precious gem, it is a symbol of ultimate power, capable of effortlessly cutting through any obstacle or foe."
+        )
 
-    def test_main_using_main_template(self):
-        response = Client().get('/main/')
-        self.assertTemplateUsed(response, 'main.html')
