@@ -14,9 +14,9 @@ class mainTest(TestCase):
         # Create a sample item for testing
         self.item = Item.objects.create(
             name="Test Item",
-            category="Diamond helmet",
+            category="Test Category",
             price=1000,
-            amount=5,
+            amount=10,
             description="This is a test item for unit testing."
         )
 
