@@ -2,6 +2,9 @@ from django.shortcuts import render
 
 def show_item(request):
     context = {
+        'creator' : 'Rakha Fadil Atmojo',
+        'npm' : 2206082985,
+        'pbpclass' : 'PBP C',
         'items': [
             {
                 'name': 'Diamond Sword',
