@@ -39,9 +39,12 @@ Tautan menuju aplikasi adaptable Inventoreal bisa diakses melalui [tautan ini](h
 from django.db import models
 
 class Item(models.Model):
+    creator = models.CharField(max_length=255, default='Rakha Fadil Atmojo')
+    npm = models.CharField(max_length=255, default='2206082985')
+    pbpclass = models.CharField(max_length=255, default='PBP C')
     name = models.CharField(max_length=255)
     category = models.CharField(max_length=255)
-    price = models.IntegerField()
+    price = models.PositiveIntegerField()
     amount = models.IntegerField()
     description = models.TextField()
 ```
@@ -68,11 +71,19 @@ from django.shortcuts import render
 ```py
 def show_item(request):
     context = {
-        'name': 'Diamond Sword',
-        'category': 'Weapon',
-        'price' : 1000,
-        'amount' : 5,
-        'description' : 'A legendary weapon known for its exceptional sharpness and stunning craftsmanship. Crafted from the world\'s most precious gem, it is a symbol of ultimate power, capable of effortlessly cutting through any obstacle or foe.'
+    'creator' : 'Rakha Fadil Atmojo',
+        'npm' : 2206082985,
+        'pbpclass' : 'PBP C',
+        'items': [
+            {
+                'name': 'Diamond Sword',
+                'category': 'Weapon',
+                'price': 1000,
+                'amount': 1,
+                'description': 'A rare gem-forged blade, renowned for its unmatched sharpness and exquisite artistry, can effortlessly conquer any obstacle.',
+            },
+            ...
+        ]
     }
 
     return render(request, "main.html", context)
