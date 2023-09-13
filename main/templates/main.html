@@ -1,3 +1,4 @@
+{% extends 'base.html' %}
 <!DOCTYPE html>
 <html>
     <head>
@@ -56,6 +57,25 @@
                 background-color: rgb(95, 196, 95);
                 width: 5px;
             }
+            .container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            button{
+                background-color: rgb(95, 196, 95);
+                border: none;
+                color: #fff;
+                padding: 10px 20px;
+                justify-content: center;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 15px;
+                margin: 4px 2px;
+                cursor: pointer;
+                border-radius: 5px;
+            }
         </style>
     </head>
     <body>
@@ -79,11 +99,22 @@
                 <tr>
                     <td>{{ item.name }}</td>
                     <td>{{ item.category }}</td>
+                    <td>{{ item.description }}</td>
                     <td>{{ item.price }}</td>
                     <td>{{ item.amount }}</td>
-                    <td>{{ item.description }}</td>
                 </tr>
             {% endfor %}
         </table>
     </body>
+
+    <br />
+
+    <a href="{% url 'main:create_item' %}">
+        <div class="container">
+            <button>
+              Add Item
+            </button>
+        </div>  
+    </a>
 </html>
+{% endblock content %}
