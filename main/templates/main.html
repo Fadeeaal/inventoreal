@@ -50,7 +50,7 @@
                 font-size: 30px
                 margin-top: 80px;
             }
-            table {
+            table{
                 margin-top: 30px;
                 width: 90%;
                 border-collapse: collapse;
@@ -95,6 +95,11 @@
                 color: white;
                 padding: 40px;
             }
+            .mid-but{
+                display: flex;
+                justify-content: center;
+                margin-top: 20px;
+            }
         </style>
     </head>
     <body>
@@ -133,10 +138,12 @@
 
     <br />
 
-    <a href="{% url 'main:create_item' %}">
-        <button>
-            Add Item
-        </button> 
-    </a>
+    <div class="mid-but">
+        <a href="{% url 'main:create_item' %}">
+            <button>
+                Add Item
+            </button> 
+        </a>
+    </div>
 </html>
 {% endblock content %}
