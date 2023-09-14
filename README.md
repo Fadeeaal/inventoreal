@@ -33,12 +33,12 @@ Tautan menuju aplikasi adaptable Inventoreal bisa diakses melalui [tautan ini](h
 
 ## **Cara membuat model pada aplikasi `main`**
 
-1. Buka file `models.py` dan isi file tersebut dengan nama `Item` dan atribut-atribut dan tipe data yang ingin digunakan. Dalam program ini, ada 3 atribut wajib (name, amount, description) dan 2 atribut tambahan (category, price).
+1. Buka file `models.py` dan isi file tersebut dengan nama `Items` dan atribut-atribut dan tipe data yang ingin digunakan. Dalam program ini, ada 3 atribut wajib (name, amount, description) dan 2 atribut tambahan (category, price).
 
 ```py
 from django.db import models
 
-class Item(models.Model):
+class Items(models.Model):
     creator = models.CharField(max_length=255, default='Rakha Fadil Atmojo')
     npm = models.CharField(max_length=255, default='2206082985')
     pbpclass = models.CharField(max_length=255, default='PBP C')

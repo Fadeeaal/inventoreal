@@ -7,11 +7,12 @@ from django.urls import reverse
 from main.models import Item
 
 def show_main(request):
-    items : Item.objects.all()
+    items = Item.objects.all()
     context = {
         'creator' : 'Rakha Fadil Atmojo',
         'npm' : 2206082985,
         'pbpclass' : 'PBP C',
+        'item' : items,
     }
     return render(request, "main.html", context)
 

@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% block content %}
 <!DOCTYPE html>
 <html>
     <head>
@@ -10,30 +11,38 @@
         <link rel="stylesheet" href="">
         <style>
             *{
+                padding: 0;
+                margin: 0;
                 font-family: sans-serif;
                 background-color: #000000;
             }
-            .wrap{
+            .container{
+                background-color: green;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .isi{
+                width: 100%;
+                height: 100px;
+                background-color: black;
                 display: flex;
                 justify-content: space-between;
-                font-size: 25px;
-                width: 100%;
-                height: 60px;
-                box-shadow: 0 7px 15px 0 rgba(0,0,0,0.5);
+                font-size: 20px;
             }
             .brand{
                 display: flex;
                 flex-direction: row;
-                font-size: 2em;
-                padding: 20px;
-                color: rgb(95, 196, 95);
+                font-size: 40px;
+                padding: 40px;
+                justify-content: center;
+                align-items: center;
             }
-            .profile{
-                display: flex;
-                flex-direction: row;
-                font-size: 15px;
-                padding: 20px;
-                color: rgb(95, 196, 95);
+            .firstName{
+                color: green;
+            }
+            .secName{
+                color: white;
             }
             h2{
                 color: #fff;
@@ -63,58 +72,71 @@
                 align-items: center;
             }
             button{
+                justify-content: center;
+                text-align: center;
                 background-color: rgb(95, 196, 95);
                 border: none;
                 color: #fff;
+                display: flex;
                 padding: 10px 20px;
-                justify-content: center;
-                text-align: center;
-                text-decoration: none;
                 display: inline-block;
                 font-size: 15px;
                 margin: 4px 2px;
                 cursor: pointer;
                 border-radius: 5px;
+                text-decoration: none;
+            }
+            button:hover{
+                background-color: #fff;
+                color: rgb(95, 196, 95);
+                transition: all .3s ease-in-out;
+            }
+            .profile{
+                color: white;
+                padding: 40px;
             }
         </style>
     </head>
     <body>
-        <nav class="wrap">
-            <div class="brand">Inventoreal</div>
-            <div class="profile">
-                <p>Associated by {{ creator }} - {{ npm }} - {{ pbpclass }}</p>
-            </div>
-        </nav>
+        <div class="container">
+            <nav class="isi">
+                <div class="brand">
+                    <div class="firstName">Invento</div>
+                    <div class="secName">real</div>
+                </div>
+                <div class="profile">
+                    {{ creator }} - {{ npm }} - {{ pbpclass }}
+                </div>
+            </nav>
+        </div>
 
         <h2>Product List</h2>
-        <table>
-            <tr>
-                <th>Name</th>
-                <th>Category</th>
-                <th>Price</th>
-                <th>Amount</th>
-                <th>Description</th>
-            </tr>
-            {% for item in items %}
+            <table>
                 <tr>
-                    <td>{{ item.name }}</td>
-                    <td>{{ item.category }}</td>
-                    <td>{{ item.description }}</td>
-                    <td>{{ item.price }}</td>
-                    <td>{{ item.amount }}</td>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Amount</th>
                 </tr>
-            {% endfor %}
-        </table>
+                {% for x in item %}
+                    <tr>
+                        <td>{{ x.name }}</td>
+                        <td>{{ x.category }}</td>
+                        <td>{{ x.description }}</td>
+                        <td>{{ x.price }}</td>
+                        <td>{{ x.amount }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
     </body>
 
     <br />
 
     <a href="{% url 'main:create_item' %}">
-        <div class="container">
-            <button>
-              Add Item
-            </button>
-        </div>  
+        <button>
+            Add Item
+        </button> 
     </a>
 </html>
 {% endblock content %}
