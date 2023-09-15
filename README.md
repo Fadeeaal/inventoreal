@@ -33,12 +33,12 @@ Tautan menuju aplikasi adaptable Inventoreal bisa diakses melalui [tautan ini](h
 
 ## **Cara membuat model pada aplikasi `main`**
 
-1. Buka file `models.py` dan isi file tersebut dengan nama `Item` dan atribut-atribut dan tipe data yang ingin digunakan. Dalam program ini, ada 3 atribut wajib (name, amount, description) dan 2 atribut tambahan (category, price).
+1. Buka file `models.py` dan isi file tersebut dengan nama `Items` dan atribut-atribut dan tipe data yang ingin digunakan. Dalam program ini, ada 3 atribut wajib (name, amount, description) dan 2 atribut tambahan (category, price).
 
 ```py
 from django.db import models
 
-class Item(models.Model):
+class Items(models.Model):
     creator = models.CharField(max_length=255, default='Rakha Fadil Atmojo')
     npm = models.CharField(max_length=255, default='2206082985')
     pbpclass = models.CharField(max_length=255, default='PBP C')
@@ -66,10 +66,10 @@ class Item(models.Model):
 from django.shortcuts import render
 ```
 
-3. Buat fungsi `show_item` dengan 1 parameter (anggap namanya `request`) dan di dalam fungsinya, buat sebuah dictionary yang berisi data yang akan dikirimkan ke tampilan yang kemudian di return dengan fungsi `render` dengan 3 argumennya, yaitu `request` (objek permintaan HTTP yang dikirim oleh pengguna), nama file html yang digunakan untuk me-_render_ tampilan, dan `context` (dictionary yang berisi data untuk digunakan dalam penampilan dinamis). Berikut adalah contohnya.
+3. Buat fungsi `show_main` dengan 1 parameter (anggap namanya `request`) dan di dalam fungsinya, buat sebuah dictionary yang berisi data yang akan dikirimkan ke tampilan yang kemudian di return dengan fungsi `render` dengan 3 argumennya, yaitu `request` (objek permintaan HTTP yang dikirim oleh pengguna), nama file html yang digunakan untuk me-_render_ tampilan, dan `context` (dictionary yang berisi data untuk digunakan dalam penampilan dinamis). Berikut adalah contohnya.
 
 ```py
-def show_item(request):
+def show_main(request):
     context = {
     'creator' : 'Rakha Fadil Atmojo',
         'npm' : 2206082985,
@@ -89,7 +89,7 @@ def show_item(request):
     return render(request, "main.html", context)
 ```
 
-4. Buka file `main.html` tadi dan ubah kode yang sebelumnya dibuat secara statis menjadi kode Django yang sesuai untuk menampilkan data. Gunakan sintaksis Django yang menggunakan tanda kurung ganda ganda `({{ }})` untuk memasukkan data dari dictionary data yang dikirimkan oleh fungsi `show_item`
+4. Buka file `main.html` tadi dan ubah kode yang sebelumnya dibuat secara statis menjadi kode Django yang sesuai untuk menampilkan data. Gunakan sintaksis Django yang menggunakan tanda kurung ganda ganda `({{ }})` untuk memasukkan data dari dictionary data yang dikirimkan oleh fungsi `show_main`
 
 ## **Cara membuat sebuah routing pada urls.py aplikasi `main` untuk memetakan fungsi yang telah dibuat pada views.py**
 
@@ -97,16 +97,16 @@ def show_item(request):
 
 ```py
 from django.urls import path
-from main.views import show_item
+from main.views import show_main
 ```
 
-2. Tambahkan urlpatterns untuk menghubungkan path dengan fungsi yang telah Anda buat di `views.py`, yaitu `show_item`
+2. Tambahkan urlpatterns untuk menghubungkan path dengan fungsi yang telah Anda buat di `views.py`, yaitu `show_main`
 
 ```py
 app_name = 'main'
 
 urlpatterns = [
-    path('', show_item, name='show_item'),
+    path('', show_main, name='show_main'),
 ]
 ```
 
@@ -187,3 +187,225 @@ MVT adalah konsep yang utamanya digunakan dalam pengembangan web dengan mengguna
 #### MVVM
 
 MVVM sering digunakan dalam pengembangan aplikasi berbasis antarmuka pengguna (UI), seperti aplikasi mobile atau desktop. Ini memiliki fokus untuk memisahkan tugas tampilan dan logika dalam UI. Adanya ViewModel yang bertindak sebagai perantara antara Model dan View memungkinkan keduanya untuk tetap terpisah dan mengurangi ketergantungan antara keduanya. MVVM ini mengandalkan sistem pengikatan data (_data binding_) untuk secara otomatis memperbarui tampilan ketika data berubah di ViewModel. Ini mengurangi kode boilerplate yang diperlukan untuk pembaruan tampilan, tetapi jika _data binding_ tersebut sangat kompleks, akan sedikit lebih sulit untuk melakukan _debugging_ aplikasinya
+
+## **Cara mengimplementasikan _Skeleton_ sebagai Kerangka Views**
+1. Buat folder bernama `templates` di dalam root folder dan buatlah file bernama `base.html`. Isi file tersebut dengan kode di bawah ini.
+```html
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+        />
+        {% block meta %}
+        {% endblock meta %}
+    </head>
+
+    <body>
+        {% block content %}
+        {% endblock content %}
+    </body>
+</html>
+```
+2. Buka `settings.py` pada subdirektori `inventoreal` dan cari variabel `TEMPLATES` yang bertipe data list of dictionaries, kemudian sesuaikan value dari key `DIRS` untuk mengarahkan ke folder `templates` yang telah dibuat sebelumnya.
+```py
+TEMPLATES = [
+    {
+        ...
+        'DIRS': [BASE_DIR / 'templates'],
+        ...
+    }
+]
+```
+3. Pada `main/templates/main.html`, tambahkan kode di bawah ini untuk meng-_extend_ dari `base.html` yang baru saja dibuat.
+```html
+{% extends 'base.html' %}
+{% block content %}
+    ...
+    //kode html yang telah dibuat sebelumnya
+    ...
+{% endblock content %}
+```
+
+## **Cara membuat input form untuk menambahkan objek model pada aplikasi**
+1. Jalankan virtual environment terlebih dahulu. Untuk windows, menggunakan command `env\Scripts\activate.bat` dan untuk unix menggunakan command `source env/bin/activate`
+
+2. Kita implementasikan dahulu sebuah skeleton sebagai kerangka viewsnya. Untuk tata caranya, silahkan mengikuti [link ini](#cara-mengimplementasikan-skeleton-sebagai-kerangka-views)
+
+3. Buat file terbaru, yaitu `forms.py` pada folder `main` yang bertujuan untuk membuat struktur form yang dapat menerima data produk baru saat diinput, dan tambahkan kode di bawah ini
+```py
+from django.forms import ModelForm
+from main.models import Item
+
+class ItemForm(ModelForm):
+    class Meta:
+        model = Item
+        fields = ["name", "category", "price", "amount", "description"]
+```
+> [!NOTE]
+> isi variabel `fields` disesuaikan dengan informasi / variabel apa saja yang ingin diminta dari user
+
+4. Buka file `main/views.py` dan tambahkan beberapa import serta function `create_item` untuk menghasilkan form yang dapat menambahkan data produk secara otomatis ketika data di-_submit_ dari form
+```py
+from django.http import HttpResponseRedirect
+from main.forms import ProductForm
+from django.urls import reverse
+...
+def create_item(request):
+    form = ItemForm(request.POST or None)
+
+    if form.is_valid() and request.method == "POST":
+        form.save()
+        return HttpResponseRedirect(reverse('main:show_main'))
+
+    context = {'form': form}
+    return render(request, "create_item.html", context)
+```
+
+## **Cara menambahkan fungsi views untuk melihat objek yang sudah ditambahkan (HTML, XML, JSON, XML by ID, dan JSON by ID)**
+### **HTML**
+1. Pada file `main/views.py`, ubah function `show_main` untuk mengambil seluruh object Item yang tersimpan pada database
+```py
+def show_main(request):
+    items = Item.objects.all()
+    context = {
+        'creator' : 'Rakha Fadil Atmojo',
+        'npm' : 2206082985,
+        'pbpclass' : 'PBP C',
+        'item' : items,
+    }
+    return render(request, "main.html", context)
+```
+
+2. Buka `main/urls.py`, lalu import function `create_item` yang sudah dibuat tadi dan tambahkan path url ke dalam url patterns untuk mengakses function tadi.
+```py
+from main.views import show_main, create_item
+...
+urlpatterns = [
+    ...
+    path('create-item', create_item, name='create_item'),
+]
+```
+
+3. Buat file `create_item.html` di dalam folder `main/templates` yang berfungsi sebagai tampilan form untuk meminta input data. Berikut adalah isi dari filenya.
+```py
+{% extends 'base.html' %} 
+
+{% block content %}
+<h1>Add New Product</h1>
+
+<form method="POST">
+    {% csrf_token %}
+    <table>
+        {{ form.as_table }}
+        <tr>
+            <td></td>
+            <td>
+                <input type="submit" value="Add Item"/>
+            </td>
+        </tr>
+    </table>
+</form>
+
+{% endblock %}
+```
+
+4. Buka `main.html` dalam folder `main/templates` dan tambahkan kode di dalam `{% block content %}` untuk menampilkan barang yang di-_input_ melalui `create_item.html` dalam bentuk tabel.
+```html
+...
+<table>
+<tr>
+    <th>Name</th>
+    <th>Category</th>
+    <th>Description</th>
+    <th>Price</th>
+    <th>Amount</th>
+</tr>
+{% for x in item %}
+    <tr>
+        <td>{{ x.name }}</td>
+        <td>{{ x.category }}</td>
+        <td>{{ x.description }}</td>
+        <td>{{ x.price }}</td>
+        <td>{{ x.amount }}</td>
+    </tr>
+{% endfor %}
+</table>
+...
+```
+### **XML**
+1. Buka file `main/views.py`, kemudian import `HttpResponse` dan `Serializer` dan tambahkan function `show_xml`
+```py
+from django.http import HttpResponse
+from django.core import serializers
+...
+def show_xml(request):
+    data = Item.objects.all()
+    return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
+```
+> [!NOTE]
+> serializers digunakan untuk translate objek model menjadi format lain.
+
+2. Buka `main/urls.py` untuk import function `show_xml` dan tambahkan routing url ke url patterns sebagai akses menuju fungsi tersebut
+```py
+from main.views import show_main, create_item, show_xml
+...
+urlpatterns = [
+    ...
+    path('xml/', show_xml, name='show_xml'),
+    ...
+]
+```
+
+### **JSON**
+1. Buka file `views.py` pada folder `main` dan buat fungsi `show_json` yang menerima parameter `request`
+```py
+def show_json(request):
+    data = Item.objects.all()
+    return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+```
+
+2. Buka `urls.py` yang ada pada folder `main` dan import fungsi yang sudah dibuat tadi `(show_json)` dan tambahkan path url ke dalam urlpatterns untuk mengakses fungsi yang diimpor tadi
+```py
+from main.views import show_main, create_item, show_xml, show_json
+...
+urlpatterns = [
+    ...
+    path('json/', show_json, name='show_json'),
+    ...
+]
+```
+
+### **XML dan JSON by ID**
+1. Buka kembali folder `main` dan akses file `urls.py`, kemudian buat function baru, `show_xml_by_id` dan `show_json_by_id` dengan mengembalikan function berupa `HttpResponse` yang berisi parameter data hasil query yang sudah diserialisasi menjadi JSON atau XML dan parameter `content_type`
+```py
+...
+def show_xml_by_id(request, id):
+    data = Item.objects.filter(pk=id)
+    return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
+
+def show_json_by_id(request, id):
+    data = Item.objects.filter(pk=id)
+    return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+...
+```
+
+2. Buka `urls.py` yang ada pada folder `main` dan import fungsi yang sudah dibuat tadi, yaitu `show_xml_by_id` dan `show_json_by_id`, kemudian perbarui path url yang di dalam urlpatterns untuk mengakses kedua fungsi tersebut, sehingga tampilan akhirnya pada file `main/urls.py` akan menjadi seperti [ini](main/urls.py)
+```py
+from django.urls import path
+from main.views import show_main, create_item, show_xml, show_json, show_xml_by_id, show_json_by_id 
+
+app_name = 'main'
+
+urlpatterns = [
+    path('', show_main, name='show_main'),
+    path('create-item', create_item, name='create_item'),
+    path('xml/', show_xml, name='show_xml'),
+    path('json/', show_json, name='show_json'),
+    path('xml/<int:id>/', show_xml_by_id, name='show_xml_by_id'),
+    path('json/<int:id>/', show_json_by_id, name='show_json_by_id'),
+]
+```
