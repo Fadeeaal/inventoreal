@@ -4,9 +4,7 @@
 from django.urls import path #untuk mendefinisikan pola URL
 from main.views import show_main, create_item, show_xml, show_json, show_xml_by_id, show_json_by_id 
 
-
- #sebagai tampilan yang akan ditampilkan ketika URL terkait diakses
-
+#sebagai tampilan yang akan ditampilkan ketika URL terkait diakses
 app_name = 'main'
 
 urlpatterns = [
