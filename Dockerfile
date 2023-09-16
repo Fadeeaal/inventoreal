@@ -4,13 +4,13 @@ WORKDIR /app
 
 ENV PYTHONUNBUFFERED=1 \
     PYTHONPATH=/app \
-    DJANGO_SETTINGS_MODULE=inventoreal.settings \
+    DJANGO_SETTINGS_MODULE=shopping_list.settings \
     PORT=8000 \
     WEB_CONCURRENCY=2
 
 # Install system packages required Django.
 RUN apt-get update --yes --quiet && apt-get install --yes --quiet --no-install-recommends \
-&& rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/*
 
 RUN addgroup --system django \
     && adduser --system --ingroup django django
@@ -29,4 +29,4 @@ RUN chown -R django:django /app
 USER django
 
 # Run application
-# CMD gunicorn inventoreal.wsgi:application
+# CMD gunicorn shopping_list.wsgi:application

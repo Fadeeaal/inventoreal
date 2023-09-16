@@ -1,10 +1,10 @@
 # Inventoreal
 
-Tautan menuju aplikasi adaptable Inventoreal bisa diakses melalui [tautan ini](https://inventoreal.adaptable.app/).
+Tautan menuju aplikasi adaptable Inventoreal bisa diakses melalui [tautan ini](https://shopping_list.adaptable.app/).
 
 ## **Cara membuat proyek Django baru**
 
-1. Buat direktori baru dengan nama yang Anda inginkan, misalnya `inventoreal` dan buka command prompt (untuk Windows) atau terminal shell di dalam direktori tersebut.
+1. Buat direktori baru dengan nama yang Anda inginkan, misalnya `shopping_list` dan buka command prompt (untuk Windows) atau terminal shell di dalam direktori tersebut.
 
 2. Buat virtual environment dengan perintah `python -m venv env` untuk mengisolasi proyek Python kita dan aktifkan virtual environment dengan perintah `env\Scripts\activate.bat` (Windows) atau `source env/bin/activate` (Linux/Mac).
 
@@ -112,7 +112,7 @@ urlpatterns = [
 
 ## **Cara melakukan routing pada proyek agar dapat menjalankan aplikasi `main`**
 
-1. Buka berkas `urls.py` di dalam direktori proyek `inventoreal` dan import modul `include` dari `django.urls` (`from django.urls import path, include`) untuk melakukan konfigurasi routing tampilan `main`
+1. Buka berkas `urls.py` di dalam direktori proyek `shopping_list` dan import modul `include` dari `django.urls` (`from django.urls import path, include`) untuk melakukan konfigurasi routing tampilan `main`
 
 2. Di dalam variabel urlpatterns, tambahkan path yang akan mengarahkan ke aplikasi 'main', bisa menggunakan `include()` untuk menghubungkan ke file `urls.py` di aplikasi 'main'.
 
@@ -210,7 +210,7 @@ MVVM sering digunakan dalam pengembangan aplikasi berbasis antarmuka pengguna (U
     </body>
 </html>
 ```
-2. Buka `settings.py` pada subdirektori `inventoreal` dan cari variabel `TEMPLATES` yang bertipe data list of dictionaries, kemudian sesuaikan value dari key `DIRS` untuk mengarahkan ke folder `templates` yang telah dibuat sebelumnya.
+2. Buka `settings.py` pada subdirektori `shopping_list` dan cari variabel `TEMPLATES` yang bertipe data list of dictionaries, kemudian sesuaikan value dari key `DIRS` untuk mengarahkan ke folder `templates` yang telah dibuat sebelumnya.
 ```py
 TEMPLATES = [
     {
@@ -295,7 +295,7 @@ urlpatterns = [
 {% extends 'base.html' %} 
 
 {% block content %}
-<h1>Add New Product</h1>
+<h1>Add New Item</h1>
 
 <form method="POST">
     {% csrf_token %}
