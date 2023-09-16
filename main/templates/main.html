@@ -11,6 +11,7 @@
 <table>
     <tr>
         <th>Name</th>
+        <th>Category</th>
         <th>Description</th>
         <th>Price</th>
         <th>Amount</th>
@@ -21,6 +22,7 @@
     {% for product in item %}
         <tr>
             <td>{{product.name}}</td>
+            <td>{{product.category}}</td>
             <td>{{product.description}}</td>
             <td>{{product.price}}</td>
             <td>{{product.amount}}</td>
