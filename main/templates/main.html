@@ -124,7 +124,11 @@
                     <th>Price</th>
                     <th>Amount</th>
                 </tr>
+<<<<<<< HEAD
                 {% for product in item %}
+=======
+                {% for x in item %}
+>>>>>>> 2447b95fe4e76b45f663ea7267195b3407176db0
                     <tr>
                         <td>{{ x.name }}</td>
                         <td>{{ x.category }}</td>
@@ -139,11 +143,19 @@
     <br />
 
     <div class="mid-but">
+<<<<<<< HEAD
         <a href="{% url 'main:create_product' %}">
+=======
+        <a href="{% url 'main:create_item' %}">
+>>>>>>> 2447b95fe4e76b45f663ea7267195b3407176db0
             <button>
                 Add Item
             </button> 
         </a>
     </div>
 </html>
+<<<<<<< HEAD
 {% endblock content %}
+=======
+{% endblock content %}
+>>>>>>> 2447b95fe4e76b45f663ea7267195b3407176db0
