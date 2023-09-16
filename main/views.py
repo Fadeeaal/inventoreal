@@ -12,6 +12,7 @@ def show_main(request):
     context = {
         'creator': 'Rakha Fadil Atmojo',
         'pbpclass': 'PBP C',
+        'npm': '2206082985',
         'item': products
     }
 
