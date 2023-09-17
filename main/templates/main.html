@@ -10,19 +10,19 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="">
         <style>
-            *{
+            * {
                 padding: 0;
                 margin: 0;
                 font-family: sans-serif;
                 background-color: #000000;
             }
-            .container{
+            .container {
                 background-color: green;
                 display: flex;
                 justify-content: center;
                 align-items: center;
             }
-            .isi{
+            .isi {
                 width: 100%;
                 height: 100px;
                 background-color: black;
@@ -30,7 +30,7 @@
                 justify-content: space-between;
                 font-size: 20px;
             }
-            .brand{
+            .brand {
                 display: flex;
                 flex-direction: row;
                 font-size: 40px;
@@ -38,23 +38,28 @@
                 justify-content: center;
                 align-items: center;
             }
-            .firstName{
+            .firstName {
                 color: green;
             }
-            .secName{
+            .secName {
                 color: white;
             }
-            h2{
+            h2 {
                 color: #fff;
                 text-align: center;
-                font-size: 30px
-                margin-top: 80px;
+                font-size: 30px;
             }
-            table{
+            h4 {
+                color: #fff;
+                text-align: center;
+                font-size: 20px;
+                margin-top: 20px;
+            }
+            table {
                 margin-top: 30px;
                 width: 90%;
                 border-collapse: collapse;
-                margin: 40px auto 0; 
+                margin: 40px auto 0;
             }
             th, td {
                 border: 3px solid #fff;
@@ -62,7 +67,7 @@
                 text-align: center;
                 color: #fff;
             }
-            th{
+            th {
                 background-color: rgb(95, 196, 95);
                 width: 5px;
             }
@@ -71,7 +76,7 @@
                 justify-content: center;
                 align-items: center;
             }
-            button{
+            button {
                 justify-content: center;
                 text-align: center;
                 background-color: rgb(95, 196, 95);
@@ -86,21 +91,21 @@
                 border-radius: 5px;
                 text-decoration: none;
             }
-            button:hover{
+            button:hover {
                 background-color: #fff;
                 color: rgb(95, 196, 95);
                 transition: all .3s ease-in-out;
             }
-            .profile{
+            .profile {
                 color: white;
                 padding: 40px;
             }
-            .mid-but{
+            .mid-but {
                 display: flex;
                 justify-content: center;
                 margin-top: 20px;
             }
-        </style>
+        </style>        
     </head>
     <body>
         <div class="container">
@@ -116,6 +121,7 @@
         </div>
 
         <h2>Product List</h2>
+        <h4>You are storing {{ total_items }} {% if total_items == 1 %}item{% else %}items{% endif %} in this application</h4>
             <table>
                 <tr>
                     <th>Name</th>
