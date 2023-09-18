@@ -13,7 +13,8 @@ def show_main(request):
         'creator': 'Rakha Fadil Atmojo',
         'pbpclass': 'PBP C',
         'npm': '2206082985',
-        'item': products
+        'item': products,
+        'total_items': len(products)
     }
 
     return render(request, "main.html", context)

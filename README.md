@@ -327,7 +327,7 @@ urlpatterns = [
 {% for x in item %}
     <tr>
         <td>{{ x.name }}</td>
-        <td>{{ x.category }}</td>
+        <td>{{ x.categories }}</td>
         <td>{{ x.description }}</td>
         <td>{{ x.price }}</td>
         <td>{{ x.amount }}</td>
@@ -409,3 +409,38 @@ urlpatterns = [
     path('json/<int:id>/', show_json_by_id, name='show_json_by_id'),
 ]
 ```
+
+## **Perbedaan antara form POST dan form GET dalam Django**
+Metode POST dan GET dalam Django adalah dua pendekatan berbeda dalam pertukaran data antara browser dan server web saat mengirim data dari formulir HTML. Metode POST digunakan ketika Anda perlu mengirim data sensitif dengan aman, dan data tersebut tidak harus terlihat dalam URL. Misalnya, ketika mengirim kata sandi atau informasi pribadi, metode POST cocok digunakan. Data dikirim dalam tubuh permintaan HTTP, dan hal ini menjadikan data tersebut tidak terlihat oleh pengguna atau tidak terekspose saat proses pengiriman. Sebaliknya, metode GET mengirim data sebagai bagian dari URL, yang membuat data tersebut terlihat di dalam URL. Ini berarti metode GET cocok untuk operasi baca (read-only), seperti pencarian atau pengiriman parameter dalam URL. Data yang dikirim melalui metode GET dapat diakses di Django menggunakan objek request.GET.
+
+Pemrosesan server juga memainkan peran penting dalam pemilihan metode. Metode POST umumnya digunakan ketika ingin melakukan operasi yang memodifikasi atau menyimpan data di server, seperti menambahkan catatan ke database, mengirim email, atau melakukan tindakan lain yang memengaruhi status server. Sementara metode GET lebih sesuai untuk operasi yang hanya membaca data di server tanpa mengubahnya, seperti pencarian, filtering, atau mengambil data yang sudah ada.
+
+Selain itu, terdapat perbedaan dalam keamanan dan bookmarking. Data yang dikirim melalui metode POST tidak cocok untuk di-bookmark karena data tersebut tidak terlihat dalam URL, dan ini membuatnya lebih aman untuk mengirim data sensitif. Sebaliknya, metode GET lebih cocok untuk di-bookmark karena data tersebut terlihat di URL, meskipun harus diperhatikan bahwa ini tidak cocok untuk data sensitif dan lebih rentan terhadap potensi serangan. Perlu tahu bahwa permintaan dengan metode POST umumnya tidak di-cache oleh browser, sehingga pengguna selalu mendapatkan respon yang "segar" dari server. Sementara metode GET dapat di-cache oleh browser, yang dapat meningkatkan kinerja, namun harus berhati-hati karena pengguna mungkin melihat data yang sudah kedaluwarsa
+
+## **Perbedaan utama antara XML, JSON, dan HTML dalam konteks pengiriman data**
+Secara singkat, XML cocok untuk pertukaran data yang sangat terstruktur dan ketat, JSON cocok untuk pertukaran data yang lebih sederhana dan efisien dalam konteks aplikasi web, sedangkan HTML adalah bahasa markup yang digunakan untuk membuat tampilan halaman web yang bisa diakses oleh manusia.
+
+XML adalah bahasa markup yang dirancang untuk menyimpan dan mengirim data dengan struktur yang kuat dan sangat terstruktur. XML menggunakan tag-tag yang mendefinisikan elemen-elemen data dan atribut-atribut untuk memberikan informasi tambahan tentang elemen-elemen tersebut. XML sangat kuat dalam mendefinisikan skema data yang ketat, yang membuatnya cocok untuk pertukaran data yang kompleks seperti data konfigurasi, data yang harus divalidasi dengan ketat, atau dalam format data yang bisa dibaca oleh mesin. Namun, XML memiliki overhead dalam hal ukuran file karena strukturnya yang kuat, dan parsing XML memerlukan penggunaan sumber daya komputasi yang signifikan.
+
+JSON adalah format pertukaran data yang lebih ringan dan mudah dibaca oleh mesin. JSON menggunakan struktur objek dan array yang lebih sederhana daripada XML, membuatnya ideal untuk pertukaran data yang cepat dan efisien. JSON sangat populer dalam pengembangan aplikasi web modern karena dapat diurai (parsed) dan dihasilkan (serialized) dengan mudah dalam banyak bahasa pemrograman. JSON juga mendukung berbagai jenis data, termasuk teks, angka, objek, array, dan boolean, menjadikannya format yang serbaguna untuk pertukaran data antara klien dan server. Namun, JSON tidak memiliki dukungan bawaan untuk definisi skema data yang kuat, yang dapat menyebabkan masalah kompatibilitas jika tidak dikelola dengan baik.
+
+HTML adalah bahasa markup yang dirancang khusus untuk membuat dan mengatur konten web yang dapat diakses oleh manusia melalui peramban web. HTML tidak biasanya digunakan untuk pertukaran data struktural antara aplikasi, tetapi digunakan untuk membuat tampilan dan struktur halaman web. Namun, HTML memiliki kemampuan untuk menyematkan data dalam atribut atau elemen tertentu dan, dengan bantuan JavaScript, data ini dapat diakses oleh aplikasi web dan digunakan untuk interaksi klien-sisi. HTML adalah dasar dari web, dan semua halaman web modern menggunakan HTML sebagai struktur dasarnya.
+
+## **Mengapa JSON sering digunakan dalam pertukaran data antara aplikasi web modern?**
+JSON dengan format teks ringan dan fleksibilitas struktur data, memudahkan pengembang dalam memahami, mengelola, dan merepresentasikan data kompleks. Dukungan interoperabilitasnya di banyak bahasa pemrograman dan platform membuatnya serbaguna, digunakan secara luas dalam aplikasi web modern, terutama dalam berinteraksi dengan layanan web dan API eksternal. JSON juga menawarkan fitur keamanan yang mengurangi risiko serangan injeksi kode. Dalam konteks aplikasi real-time, JSON memungkinkan pembaruan data efisien antara klien dan server, meningkatkan pengalaman pengguna. Dukungan luas dari kerangka kerja dan perpustakaan web menjadikannya alat penting dalam pengembangan aplikasi web.
+
+## **Screenshot hasil akses URL pada Postman**
+### **HTML**
+![Alt text](img-properties/postman-html.jpg)
+
+### **XML**
+![Alt text](img-properties/postman-xml.jpg)
+
+### **JSON**
+![Alt text](img-properties/postman-json.jpg)
+
+### **XML by ID**
+![Alt text](img-properties/postman-xmlID.jpg)
+
+### **JSON by ID**
+![Alt text](img-properties/postman-jsonID.jpg)

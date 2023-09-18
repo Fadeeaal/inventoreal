@@ -1,19 +1,113 @@
 {% extends 'base.html' %} 
-
 {% block content %}
-<h1>Add New Product</h1>
+<!DOCTYPE html>
 
-<form method="POST">
-    {% csrf_token %}
-    <table>
-        {{ form.as_table }}
-        <tr>
-            <td></td>
-            <td>
-                <input type="submit" value="Add Product"/>
-            </td>
-        </tr>
-    </table>
-</form>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Inventoreal - Add</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+
+        <style>
+            * {
+                padding: 0;
+                margin: 0;
+                font-family: sans-serif;
+                background-color: #000000;
+                color: #fff;
+            }
+            .container {
+                background-color: green;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .isi {
+                width: 100%;
+                height: 100px;
+                background-color: black;
+                display: flex;
+                justify-content: space-between;
+                font-size: 20px;
+            }
+            .brand {
+                display: flex;
+                flex-direction: row;
+                font-size: 40px;
+                padding: 40px;
+                justify-content: center;
+                align-items: center;
+            }
+            .firstName {
+                color: green;
+            }
+            .secName {
+                color: white;
+            }
+            h2 {
+                color: #fff;
+                text-align: center;
+                font-size: 30px;
+            }
+            form {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-align: left;
+                flex-direction: column;
+                padding: 20px;
+            }
+            input {
+                width: 300px;
+                height: 20px;
+                margin: 10px;
+                border-radius: 5px;
+                border: 1px solid #fff;
+                padding: 5px;
+            }
+            input[type=submit] {
+                width: 100px;
+                height: 30px;
+                background-color: green;
+                color: #fff;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            input[type=submit]:hover {
+                background-color: #fff;
+                color: rgb(95, 196, 95);
+                transition: all .3s ease-in-out;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <nav class="isi">
+                <div class="brand">
+                    <div class="firstName">Invento</div>
+                    <div class="secName">real</div>
+                </div>
+            </nav>
+        </div>
+
+        <h2>Add New Product</h2>
+
+        <form method="POST">
+            {% csrf_token %}
+            <table>
+                {{ form.as_table }}
+            </table>
+            <input type="submit" value="Add Product"/>
+        </form>
+    </body>
+</html>
 
 {% endblock %}

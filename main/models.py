@@ -8,6 +8,6 @@ class Item(models.Model):
     pbpclass = models.CharField(max_length=255)
     name = models.CharField(max_length=255)
     description = models.TextField()
-    categories = models.TextField(default=" ")
+    categories = models.CharField(max_length=255)
     price = models.IntegerField()
     amount = models.IntegerField()
