@@ -34,7 +34,7 @@
                 display: flex;
                 flex-direction: row;
                 font-size: 40px;
-                padding: 40px;
+                padding: 40px 40px 40px 60px;
                 justify-content: center;
                 align-items: center;
             }
@@ -98,13 +98,37 @@
             }
             .profile {
                 color: white;
-                padding: 40px;
+                padding: 40px 60px 40px 40px;
             }
-            .mid-but {
+            .mid-but, .log-out {
                 display: flex;
                 justify-content: center;
                 margin-top: 20px;
             }
+            button{
+                width: 125px;
+            }
+            h5{
+                color: #fff;
+                text-align: center;
+                font-size: 20px;
+                margin-top: 20px;
+            }
+            footer {
+                color: #fff;
+                padding: 20px;
+                text-align: center;
+            }
+            
+            .footer-content {
+                max-width: 600px; /* Sesuaikan lebar maksimum sesuai kebutuhan */
+                margin: 0 auto; /* Untuk membuat footer berada di tengah halaman */
+            }
+            .footer-content p {
+                color: #fff;    
+                font-size: 13px;
+
+            }          
         </style>        
     </head>
     <body>
@@ -115,7 +139,7 @@
                     <div class="secName">real</div>
                 </div>
                 <div class="profile">
-                    {{ creator }} - {{ npm }} - {{ pbpclass }}
+                    Halo, {{ name }}!
                 </div>
             </nav>
         </div>
@@ -143,11 +167,7 @@
     </body>
 
     <br />
-    <a href="{% url 'main:logout' %}">
-        <button>
-            Logout
-        </button>
-    </a>
+    
 
     <div class="mid-but">
         <a href="{% url 'main:create_product' %}">
@@ -156,6 +176,19 @@
             </button> 
         </a>
     </div>
+    <div class="log-out">
+        <a href="{% url 'main:logout' %}">
+            <button>
+                Logout
+            </button>
+        </a>
+    </div>
     <h5>Sesi terakhir login: {{ last_login }}</h5>
+    <footer>
+        <div class="footer-content">
+            <p>Credit : {{ creator }} - {{ pbpclass }} - {{ npm }}</p>
+        </div>
+    </footer>
+
 </html>
 {% endblock content %}

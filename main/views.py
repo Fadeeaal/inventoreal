@@ -24,7 +24,7 @@ def show_main(request):
         'name': request.user.username,
         'item': products,
         'total_items': len(products),
-        'last_login': request.COOKIES['last_login'],
+        'last_login': request.COOKIES.get('last_login', 'N/A'),
     }
 
     return render(request, "main.html", context)
@@ -75,8 +75,9 @@ def login_user(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
+            current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             response = HttpResponseRedirect(reverse("main:show_main")) 
-            response.set_cookie('last_login', str(datetime.datetime.now()))
+            response.set_cookie('last_login', current_time)
             return response
         else:
             messages.info(request, 'Sorry, incorrect username or password. Please try again.')
