@@ -127,8 +127,8 @@
             .footer-content p {
                 color: #fff;    
                 font-size: 13px;
-
             }          
+            
         </style>        
     </head>
     <body>
@@ -160,7 +160,21 @@
                         <td>{{ x.categories }}</td>
                         <td>{{ x.description }}</td>
                         <td>{{ x.price }}</td>
-                        <td>{{ x.amount }}</td>
+                        <td>
+                            <form method="POST" action="{% url 'main:reduce_amount_button' x.id %}">
+                                {% csrf_token %}
+                                <button type="submit">-</button>
+                            </form>
+                            <form method="POST" action="{% url 'main:add_amount_button' x.id %}">
+                                {% csrf_token %}
+                                <button type="submit">+</button>
+                            </form>
+                            {{ x.amount }}
+                            <form method="POST" action="{% url 'main:remove_item_button' x.id %}">
+                                {% csrf_token %}
+                                <button type="submit">Remove</button>
+                            </form>
+                        </td>
                     </tr>
                 {% endfor %}
             </table>
