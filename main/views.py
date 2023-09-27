@@ -1,12 +1,10 @@
 import datetime
+from django.http import HttpResponse
 from django.http import HttpResponseRedirect
-from django.urls import reverse
 from django.shortcuts import render
-from django.http import HttpResponseRedirect
 from main.forms import ProductForm
 from django.urls import reverse
 from main.models import Item
-from django.http import HttpResponse
 from django.core import serializers
 from django.shortcuts import redirect
 from django.contrib.auth.forms import UserCreationForm

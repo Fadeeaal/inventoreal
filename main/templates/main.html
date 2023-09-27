@@ -173,7 +173,7 @@
                             <form method="POST" action="{% url 'main:remove_item_button' x.id %}">
                                 {% csrf_token %}
                                 <button type="submit">Remove</button>
-                            </form>
+                            </form> 
                         </td>
                     </tr>
                 {% endfor %}
