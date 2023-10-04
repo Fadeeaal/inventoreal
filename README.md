@@ -755,6 +755,81 @@ Penggunaan cookies dalam pengembangan web membawa sejumlah manfaat, tetapi ada j
 
 # Tugas 5
 ## Implementasi CSS dalam aplikasi
+Pada proyek **Inventoreal** ini, saya menggunakan internal CSS untuk membantu saya membuat _styling_ di beberapa fitur. Langkah singkat yang saya gunakan adalah membuat selector untuk mengelompokkan mana saja yang akan di _styling_ dengan model yang sama, apakah ingin keseluruhan diubah atau hanya beberapa bagian saja. Jika sudah, kita mulai _styling_ untuk selectornya dengan menambahkan block `<style>` di dalamnya. Berikut contohnya pada `register.html`.
+```
+{% extends 'base.html' %}
+
+{% block meta %}
+    <title>Register</title>
+{% endblock meta %}
+{% block content %}
+<style>
+    body {
+        margin:0;
+        padding:0;
+        background-image: url("https://free4kwallpapers.com/uploads/originals/2015/10/22/sunset-anime-wallpaper.jpg");
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        font-family: Arial, sans-serif;
+        overflow-y: hidden;
+    }
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .isi {
+        width: 100%;
+        height: 100px;
+        display: flex;
+        justify-content: space-between;
+        font-size: 20px;
+    }
+    .brand {
+        display: flex;
+        flex-direction: row;
+        font-size: 40px;
+        padding: 40px;
+        justify-content: center;
+        align-items: center;
+    }
+    .firstName {
+        color: green;
+    }
+    .secName {
+        color: white;
+    }
+    .... 
+</style>
+
+<div class="container">
+    <nav class="isi">
+        <div class="brand">
+            <div class="firstName">Invento</div>
+            <div class="secName">real</div>
+        </div>
+    </nav>
+</div>
+
+<div class="login-container">
+    ...
+</div>
+```
+
+Dan berikut adalah contoh hasil dari _styling_ aplikasi **Inventoreal**
+
+**Login feature**
+![Alt text](img-properties/login-acc.jpg)
+
+**Register feature**
+![Alt text](img-properties/register-acc.jpg)
+
+**Main menu**
+![Alt text](img-properties/main.jpg)
+
+**Add product feature**
+![Alt text](img-properties/add-product.jpg)
 
 ## Manfaat dari setiap element selector dan waktu yang tepat untuk menggunakannya
 ### **Universal Selector (*)**

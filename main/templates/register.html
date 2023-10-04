@@ -166,7 +166,7 @@
                     </ul>
                 {% endif %}
             {% endfor %}
-            <button type="submit">Daftar</button>
+            <button type="submit">Register</button>
         </form>
 
         {% if messages %}
@@ -175,7 +175,8 @@
                     <li>{{ message }}</li>
                 {% endfor %}
             </ul>
-        {% endif %}     
+        {% endif %}  
+        <p class="register-link">Already have an account? <a href="{% url 'main:login' %}">Login</a></p>   
     </div>
 </div>
 
