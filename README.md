@@ -752,3 +752,121 @@ Penggunaan cookies dalam pengembangan web membawa sejumlah manfaat, tetapi ada j
 
 **User 2**
 ![Alt text](img-properties/user2.jpg)
+
+# Tugas 5
+## Implementasi CSS dalam aplikasi
+Pada proyek **Inventoreal** ini, saya menggunakan internal CSS untuk membantu saya membuat _styling_ di beberapa fitur. Langkah singkat yang saya gunakan adalah membuat selector untuk mengelompokkan mana saja yang akan di _styling_ dengan model yang sama, apakah ingin keseluruhan diubah atau hanya beberapa bagian saja. Jika sudah, kita mulai _styling_ untuk selectornya dengan menambahkan block `<style>` di dalamnya. Berikut contohnya pada `register.html`.
+```
+{% extends 'base.html' %}
+
+{% block meta %}
+    <title>Register</title>
+{% endblock meta %}
+{% block content %}
+<style>
+    body {
+        margin:0;
+        padding:0;
+        background-image: url("https://free4kwallpapers.com/uploads/originals/2015/10/22/sunset-anime-wallpaper.jpg");
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        font-family: Arial, sans-serif;
+        overflow-y: hidden;
+    }
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .isi {
+        width: 100%;
+        height: 100px;
+        display: flex;
+        justify-content: space-between;
+        font-size: 20px;
+    }
+    .brand {
+        display: flex;
+        flex-direction: row;
+        font-size: 40px;
+        padding: 40px;
+        justify-content: center;
+        align-items: center;
+    }
+    .firstName {
+        color: green;
+    }
+    .secName {
+        color: white;
+    }
+    .... 
+</style>
+
+<div class="container">
+    <nav class="isi">
+        <div class="brand">
+            <div class="firstName">Invento</div>
+            <div class="secName">real</div>
+        </div>
+    </nav>
+</div>
+
+<div class="login-container">
+    ...
+</div>
+```
+
+Dan berikut adalah contoh hasil dari _styling_ aplikasi **Inventoreal**
+
+**Login feature**
+![Alt text](img-properties/login-acc.jpg)
+
+**Register feature**
+![Alt text](img-properties/register-acc.jpg)
+
+**Main menu**
+![Alt text](img-properties/main.jpg)
+
+**Add product feature**
+![Alt text](img-properties/add-product.jpg)
+
+## Manfaat dari setiap element selector dan waktu yang tepat untuk menggunakannya
+### **Universal Selector (*)**
+Manfaatnya adalah untuk memilih semua elemen pada halaman tersebut. Ketika kita ingin menerapkan sebuah _style_ ke semua elemen, misalnya untuk mereset margin atau padding, selector inilah yang tepat untuk dipilih supaya lebih rapi kode css kita.
+
+### **Element Selector (contoh : p, h1, div)**
+Dengan menggunakan Element Selector, kita dapat menetapkan gaya dasar untuk seluruh elemen dari tipe yang sama di seluruh situs web atau halaman. Misalnya, menggunakan selector p bisa menentukan gaya untuk semua elemen paragraf
+
+### **ID Selector (#)**
+ID Selector memungkinkan kita untuk menargetkan elemen berdasarkan atribut id-nya. Keunggulan utama dari ID Selector adalah spesifikitasnya karena setiap ID harus unik dalam halaman. Ini memastikan bahwa style yang diterapkan melalui ID Selector hanya akan diterapkan pada satu elemen spesifik. Ini sangat berguna untuk komponen yang unik dalam halaman, seperti navigasi utama atau header.
+
+### **Class Selector (.)**
+Selector ini memungkinkan kita untuk menargetkan satu atau lebih elemen berdasarkan atribut class-nya. Keuntungan dari Class Selector adalah fleksibilitas dan keterulangan. Kita dapat menerapkan class yang sama ke banyak elemen di seluruh halaman atau situs web, memungkinkan pengembang dengan mudah memberikan style konsisten ke sekelompok elemen. Selector ini sangat berguna untuk komponen yang muncul berulang kali atau memiliki variasi, seperti tombol, kotak teks, atau item daftar.
+
+## Jelaskan HTML5 Tag yang kamu ketahui
+### **`<header>`**
+Tag ini menandai bagian atas atau pembuka dari sebuah halaman atau bagian dari halaman. Ini biasanya berisi elemen seperti logo, judul situs, dan navigasi utama.
+
+### **`<nav>`**
+Ini digunakan untuk menandai bagian navigasi dari sebuah halaman, biasanya berisi tautan menuju bagian lain dari situs atau aplikasi web.
+
+### **`<main>`**
+Menandai konten utama dari halaman, yang unik dan tidak berulang di berbagai halaman situs.
+
+### **`<article>`**
+Digunakan untuk konten yang dapat berdiri sendiri dalam dokumen, seperti postingan blog, berita, atau artikel ilmiah. Konten di dalam `<article>` harus membuat sense meskipun ditempatkan di luar situs.
+
+### **`<section>`**
+Mewakili bagian yang berdiri sendiri dalam konteks, sering digunakan untuk membagi bagian-bagian besar konten atau layout.
+
+### **`<footer>`**
+Digunakan untuk menandai bagian bawah halaman atau bagian dari halaman. Ini biasanya berisi informasi seperti hak cipta, tautan tambahan, atau kontak.
+
+## Perbedaan antara margin dan padding
+Margin dan padding adalah dua properti penting dalam CSS yang mengatur ruang sekitar elemen. Keduanya, meskipun serupa dalam fungsi, memiliki perbedaan kunci dalam aplikasinya. Margin merujuk pada ruang di luar batas elemen, berfungsi sebagai buffer antara elemen dan elemen lain di sekitarnya. Ini tidak mewarisi warna latar belakang dari elemen dan selalu transparan. Selain itu, margin memiliki sifat khusus yang disebut "margin collapsing", di mana margin vertikal dari dua elemen yang berdekatan dapat bertabrakan atau menumpuk. Sebaliknya, padding adalah ruang di antara konten elemen dan batasnya. Berbeda dengan margin, padding mewarisi warna latar belakang dari elemen, memberikan kesan bahwa elemen itu sendiri lebih besar atau lebih luas. Padding tidak bertabrakan seperti margin, sehingga ruang yang ditentukan selalu konsisten. Selanjutnya, ketika menyangkut ukuran total elemen, padding dapat mempengaruhi dimensinya, tergantung pada model kotak yang digunakan. Secara keseluruhan, meskipun margin dan padding keduanya mengatur ruang, mereka beroperasi pada area yang berbeda dari elemen dan memiliki karakteristik unik mereka sendiri.
+
+## Perbedaan antara framework CSS Tailwind dan Bootstrap dan kapan sebaiknya kita menggunakan Bootstrap daripada Tailwind, dan sebaliknya?
+Dikenal sebagai framework berbasis komponen, Bootstrap menyediakan serangkaian komponen desain yang telah ditentukan, seperti tombol, kartu, dan navbar, yang dapat dengan mudah disesuaikan dan diintegrasikan ke dalam situs web. Ini memungkinkan pengembangan yang cepat dan konsisten, terutama bagi mereka yang ingin prototipe atau membangun situs web tanpa harus mendesain setiap komponen dari awal. Jika ingin mencari solusi cepat dengan komponen yang siap pakai dan desain yang telah teruji, Bootstrap mungkin adalah pilihan yang tepat. Ini terutama berlaku jika kita kurang familiar dengan desain atau CSS, atau jika ingin membangun aplikasi besar dengan tim yang memerlukan konsistensi desain.
+
+Sebaliknya, Tailwind mengambil pendekatan utilitas-pertama. Alih-alih menyediakan komponen yang telah ditentukan, Tailwind memberi pengembang serangkaian kelas utilitas yang memungkinkan mereka untuk membangun desain kustom dengan cepat langsung di markup. Ini memberikan kebebasan lebih dalam mendesain antarmuka, tetapi juga memerlukan pemahaman yang lebih mendalam tentang desain dan CSS. Jika kita ingin kontrol lebih besar atas estetika situs kita dan tidak keberatan untuk mencari lebih dalam mengenai desain, Tailwind mungkin lebih sesuai. Tailwind cocok bagi mereka yang ingin situs web atau aplikasi mereka memiliki tampilan yang benar-benar unik, atau bagi pengembang yang menghargai pendekatan utilitas-pertama.

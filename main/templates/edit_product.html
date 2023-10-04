@@ -1,4 +1,5 @@
 {% extends 'base.html' %} 
+
 {% block content %}
 <!DOCTYPE html>
 
@@ -6,7 +7,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Inventoreal - Add</title>
+        <title>Inventoreal - Edit</title>  <!-- Title changed to "Edit" -->
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="">
@@ -94,7 +95,6 @@
                 color: rgb(95, 196, 95);
                 transition: all .3s ease-in-out;
             }
-
         </style>
     </head>
     <body>
@@ -107,13 +107,13 @@
             </nav>
         </div>
 
-        <h2>Add New Product</h2>
+        <h2>Edit Product</h2> <!-- Title changed to "Edit Product" -->
         <form method="POST">
             {% csrf_token %}
             <table>
                 {{ form.as_table }}
             </table>
-            <input type="submit" value="Add Product"/>
+            <input type="submit" value="Update"/> <!-- Button label changed to "Edit Product" -->
         </form>
     </body>
 </html>
