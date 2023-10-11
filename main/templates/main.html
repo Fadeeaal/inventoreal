@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
 <!DOCTYPE html>
 <html>
@@ -8,7 +9,7 @@
         <title>Inventoreal</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
+        <link rel="stylesheet" href="{% static 'main.css' %}">
         <style>
             * {
                 padding: 0;
@@ -18,7 +19,7 @@
             body {
                 margin:0;
                 padding:0;
-                background-image: url("https://free4kwallpapers.com/uploads/originals/2015/10/22/sunset-anime-wallpaper.jpg");
+                background-image: url("{% static 'img-prop/forest.jpg' %}");
                 background-size: 100% 100%;
                 background-repeat: no-repeat;
                 background-attachment: fixed;
@@ -45,7 +46,7 @@
                 align-items: center;
             }
             .firstName {
-                color: green;
+                color: rgb(95, 196, 95);
             }
             .secName {
                 color: white;
@@ -61,26 +62,67 @@
                 font-size: 20px;
                 margin-top: 20px;
             }
-            table {
+            .cards-container {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-around;
+                gap: 20px;
                 margin-top: 30px;
-                width: 90%;
-                border-collapse: collapse;
-                margin: 40px auto 0;
             }
-            th, td {
-                border: 3px solid #fff;
-                padding: 8px;
-                text-align: center;
-                color: #fff;
-            }
-            th {
-                background-color: rgb(95, 196, 95);
-                width: 5px;
-            }
-            td {
+        
+            .card {
+                box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+                transition: 0.3s;
+                width: 25%;
+                border-radius: 5px;
                 background-color: rgba(0, 0, 0, 0.5);
-                width: 5px;
+                color: #fff;
+                padding: 16px;
+                margin-bottom: 20px;
             }
+        
+            .card:hover {
+                box-shadow: 0 8px 16px 0 rgba(0,0,0,0.5);
+                background-color: rgba(95, 196, 95, 0.5);
+            }
+        
+            .card-header {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 16px;
+            }
+        
+            .card-title {
+                font-size: 24px;
+                max-width: 80%; /* Set a maximum width for the title */
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        
+            .card-text {
+                margin-bottom: 16px;
+            }
+        
+            .card-actions {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-top: 16px;  /* Add space between the actions and card content */
+            }
+        
+            .card-amount {
+                display: flex;
+                align-items: center;
+            }
+        
+            .card-footer {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+        
+        
             .container {
                 display: flex;
                 justify-content: center;
@@ -156,10 +198,15 @@
                 font-size: 13px;
                 text-align: center;
             }  
-            .minus-button,.add-button,edit-btn {
+            .minus-button{
                 width: 10px;
                 display: flex;
-                margin: 0px 20px;
+                margin: 0px 10px 0px 0px;
+            }
+            .add-button,edit-btn {
+                width: 10px;
+                display: flex;
+                margin: 0px 10px;
             }      
             .remove-btn, .write-btn{
                 width: 40px;   /* Atur lebar sesuai kebutuhan Anda */
@@ -168,6 +215,7 @@
                 justify-content: center;
                 align-items: center;
                 text-decoration: none;
+                margin-left : 10px;
             }  
             .remove-btn, .minus-button{
                 background-color: red;
@@ -181,8 +229,8 @@
                 text-decoration: none;
                 margin: 0 10px;
             }
-            tr:last-child {
-                background-color: rgba(95, 196, 95, 0.8);
+            .prof-name{
+                color: rgb(95, 196, 95);
             }
             
         </style>        
@@ -195,7 +243,9 @@
                     <div class="secName">real</div>
                 </div>
                 <div class="profile">
-                    Halo, {{ name }}!
+                    <div class="prof-name">
+                        Halo, {{ name }}!
+                    </div>
                     <a href="{% url 'main:logout' %}">
                         <button class="logout-btn">
                             Logout
@@ -207,46 +257,45 @@
 
         <h2>Product List</h2>
         <h4>You are storing {{ total_items }} {% if total_items == 1 %}item{% else %}items{% endif %} in this application</h4>
-            <table>
-                <tr>
-                    <th>Name</th>
-                    <th>Category</th>
-                    <th>Description</th>
-                    <th>Price</th>
-                    <th>Amount</th>
-                    <th>Edit / Remove</th>
-                </tr>
-                {% for x in item %}
-                    <tr>
-                        <td>{{ x.name }}</td>
-                        <td>{{ x.categories }}</td>
-                        <td>{{ x.description }}</td>
-                        <td>{{ x.price }}</td>
-                        <td>
-                            <form method="POST" action="{% url 'main:reduce_amount_button' x.id %}" style="display: inline-block;">
-                                {% csrf_token %}
-                                <button type="submit" class="minus-button">-</button>
-                            </form>
-                            {{ x.amount }} <!-- Display amount in the middle -->
-                            <form method="POST" action="{% url 'main:add_amount_button' x.id %}" style="display: inline-block;">
-                                {% csrf_token %}
-                                <button type="submit" class="add-button">+</button>
-                            </form>
-                            
-                        </td>
-                        <td class="edit-btn">
-                            <a href="{% url 'main:edit_product' x.pk %}">
-                                <button class="write-btn">✎</button>
-                            </a>
-                            <form method="POST" action="{% url 'main:remove_item_button' x.id %}" style="display: inline-block;">
-                                {% csrf_token %}
-                                <button type="submit" class="remove-btn">🗑</button>
-                            </form>
-                        </td>
-                            
-                    </tr>
-                {% endfor %}
-            </table>
+        <div class="cards-container">
+            {% for x in item %}
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">{{ x.name }}</div>
+                    <div class="card-category">{{ x.categories }}</div>
+                </div>
+                <div class="card-text">{{ x.description }}</div>
+                <div class="card-price">Price: {{ x.price }}</div>
+        
+                <div class="card-actions">
+                    <div class="card-amount">
+                        <form method="POST" action="{% url 'main:reduce_amount_button' x.id %}" style="display: inline-block;">
+                            {% csrf_token %}
+                            <button type="submit" class="minus-button">-</button>
+                        </form>
+                        {{ x.amount }} <!-- Display amount in the middle -->
+                        <form method="POST" action="{% url 'main:add_amount_button' x.id %}" style="display: inline-block;">
+                            {% csrf_token %}
+                            <button type="submit" class="add-button">+</button>
+                        </form>
+                    </div>
+        
+                    <div class="card-footer">
+                        <a href="{% url 'main:edit_product' x.pk %}">
+                            <button class="write-btn">✎</button>
+                        </a>
+                        <form method="POST" action="{% url 'main:remove_item_button' x.id %}" style="display: inline-block;">
+                            {% csrf_token %}
+                            <button type="submit" class="remove-btn">🗑</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        
+        
     </body>
 
     <br />
