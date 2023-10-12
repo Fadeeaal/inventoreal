@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+
 {% block content %}
 <!DOCTYPE html>
 <html>
@@ -8,7 +9,7 @@
         <title>Inventoreal</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
+        <link rel="stylesheet" href="">   
         <style>
             * {
                 padding: 0;
@@ -40,12 +41,12 @@
                 display: flex;
                 flex-direction: row;
                 font-size: 40px;
-                padding: 40px 40px 40px 60px;
+                padding: 40px 40px 40px 0px;
                 justify-content: center;
                 align-items: center;
             }
             .firstName {
-                color: green;
+                color: rgb(95, 196, 95);
             }
             .secName {
                 color: white;
@@ -155,24 +156,19 @@
                 color: #000;    
                 font-size: 13px;
                 text-align: center;
-            }  
-            .minus-button,.add-button,edit-btn {
-                width: 10px;
-                display: flex;
-                margin: 0px 20px;
-            }      
+            }     
             .remove-btn, .write-btn{
-                width: 40px;   /* Atur lebar sesuai kebutuhan Anda */
-                height: 40px;  /* Atur tinggi sesuai kebutuhan Anda */
+                width: 40px;   
+                height: 40px; 
                 display: flex;
                 justify-content: center;
                 align-items: center;
                 text-decoration: none;
             }  
-            .remove-btn, .minus-button{
+            .remove-btn, .minus-btn{
                 background-color: red;
             }
-            .remove-btn:hover, .minus-button:hover{
+            .remove-btn:hover, .minus-btn:hover{
                 color: red;
             }
             .edit-btn a, .edit-btn form {
@@ -184,8 +180,48 @@
             tr:last-child {
                 background-color: rgba(95, 196, 95, 0.8);
             }
+            .plus-btn, .minus-btn, .remove-btn {
+                border: none;
+                color: white;
+                width: 30px;
+                height: 30px;
+                line-height: 30px; 
+                text-align: center; 
+                padding: 0; 
+                border: none;
+            }
+            .plus-btn {
+                background-color: green; 
+            }
+            .plus-btn:hover {
+                background-color: #fff;
+                color: green;
+            }
+            .button-container {
+                align-items: center; 
+            }
+            .add-btn{
+                margin-top: 20px;
+                margin-left: 20px;
+                background-color: rgb(95, 196, 95);
+                border: none;
+                color: #fff;
+                padding: 10px 20px;
+                font-size: 15px;
+                cursor: pointer;
+                border-radius: 5px;
+                text-decoration: none;
+                transition: all .3s ease-in-out;
+            }
+            .remove-btn-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100%;
+            }
             
-        </style>        
+            
+        </style>
     </head>
     <body>
         <div class="container">
@@ -206,65 +242,157 @@
         </div>
 
         <h2>Product List</h2>
-        <h4>You are storing {{ total_items }} {% if total_items == 1 %}item{% else %}items{% endif %} in this application</h4>
-            <table>
-                <tr>
-                    <th>Name</th>
-                    <th>Category</th>
-                    <th>Description</th>
-                    <th>Price</th>
-                    <th>Amount</th>
-                    <th>Edit / Remove</th>
-                </tr>
-                {% for x in item %}
-                    <tr>
-                        <td>{{ x.name }}</td>
-                        <td>{{ x.categories }}</td>
-                        <td>{{ x.description }}</td>
-                        <td>{{ x.price }}</td>
-                        <td>
-                            <form method="POST" action="{% url 'main:reduce_amount_button' x.id %}" style="display: inline-block;">
-                                {% csrf_token %}
-                                <button type="submit" class="minus-button">-</button>
-                            </form>
-                            {{ x.amount }} <!-- Display amount in the middle -->
-                            <form method="POST" action="{% url 'main:add_amount_button' x.id %}" style="display: inline-block;">
-                                {% csrf_token %}
-                                <button type="submit" class="add-button">+</button>
-                            </form>
-                            
-                        </td>
-                        <td class="edit-btn">
-                            <a href="{% url 'main:edit_product' x.pk %}">
-                                <button class="write-btn">✎</button>
-                            </a>
-                            <form method="POST" action="{% url 'main:remove_item_button' x.id %}" style="display: inline-block;">
-                                {% csrf_token %}
-                                <button type="submit" class="remove-btn">🗑</button>
-                            </form>
-                        </td>
-                            
-                    </tr>
-                {% endfor %}
-            </table>
-    </body>
-
-    <br />
-    
-
-    <div class="mid-but">
-        <a href="{% url 'main:create_product' %}">
-            <button>
-                Add Item
-            </button> 
-        </a>
-    </div>
-    <h5>Sesi terakhir login: {{ last_login }}</h5>
-    <footer>
-        <div class="footer-content">
-            <p>Credit : {{ creator }} - {{ pbpclass }} - {{ npm }}</p>
+        <h4 id="itemCount"></h4> 
+        <table id="item_table"></table>
+            
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color: rgb(95, 196, 95);">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Add New Item</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="form" onsubmit="return false;">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label for="name" class="col-form-label">Name</label>
+                                <input type="text" class="form-control form-color" id="name" name="name"></input>
+                            </div>
+                            <div class="mb-3">
+                                <label for="categories" class="col-form-label">Category</label>
+                                <input type="text" class="form-control form-color" id="categories" name="categories"></input>
+                            </div>
+                            <div class="mb-3">
+                                <label for="price" class="col-form-label">Price</label>
+                                <input type="number" class="form-control form-color" id="price" name="price"></input>
+                            </div>
+                            <div class="mb-3">
+                                <label for="amount" class="col-form-label">Amount</label>
+                                <input type="number" class="form-control form-color" id="amount" name="amount"></input>
+                            </div>
+                            <div class="mb-3">
+                                <label for="description" class="col-form-label">Description</label>
+                                <textarea class="form-control form-color" id="description" name="description"></textarea>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" id="button_close" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-warning" id="button_add" data-bs-dismiss="modal">Add Product</button>
+                    </div>
+                </div>
+            </div>
         </div>
-    </footer>
+        
+
+        <div class="button-container container">
+            <button type="button" class="add-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Add Item
+            </button>
+        </div>
+
+
+        <h5>Sesi terakhir login: {{ last_login }}</h5>
+        <footer>
+            <div class="footer-content">
+                <p>Credit : {{ creator }} - {{ pbpclass }} - {{ npm }}</p>
+            </div>
+        </footer>
 
 </html>
+<script>
+    async function getItems() {
+        return fetch("{% url 'main:get_item_json' %}").then((res) => res.json())
+    }
+
+    async function refreshItems() {
+        document.getElementById("item_table").innerHTML = ""
+        const items = await getItems()
+        const itemCountElement = document.getElementById("itemCount");
+        const totalItems = items.length; 
+        itemCountElement.innerHTML = `You are storing ${totalItems} ${totalItems === 1 ? 'item' : 'items'} in this application`;
+        let htmlString = `
+        <tr style="text-align: center;">
+            <th>Name</th>
+            <th>Category</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Amount</th>
+            <th>Remove</th>
+            
+        </tr>
+        `
+        items.forEach((item) => {
+            htmlString += `
+            <tr>
+                <td>${item.fields.name}</td>
+                <td>${item.fields.categories}</td>
+                <td>${item.fields.description}</td>
+                <td>${item.fields.price}</td>
+                <td>
+                    <div class="btn-display">
+                        <a>
+                            <button type="submit" class="minus-btn" onclick="reduceAmount(${item.pk})">-</button>
+                        </a>
+                        ${item.fields.amount}
+                        <a>
+                            <button type="submit" class="plus-btn" onclick="addAmount(${item.pk})">+</button>
+                        </a>
+                        
+                    </div>
+                </td>
+                <td>
+                    <div class="remove-btn-container">
+                        <button type="submit" class="remove-btn" onclick="removeItem(${item.pk})">🗑</button>
+                    </div>                                                                         
+                </td>
+                
+            </tr>
+        `
+        })
+        document.getElementById("item_table").innerHTML = htmlString
+    }
+
+    refreshItems()
+
+    function addItem() {
+        fetch("{% url 'main:add_item_ajax' %}", {
+            method: "POST",
+            body: new FormData(document.querySelector('#form'))
+        }).then(refreshItems)
+
+        document.getElementById("form").reset()
+        return false
+    }
+
+    function addAmount(item_id) {
+        fetch(`add_amount_button/${item_id}/`, {
+            method: "POST",
+        }).then(refreshItems)
+        return false
+    }
+
+    function reduceAmount(item_id) {
+        fetch(`reduce_amount_button/${item_id}/`, {
+            method: "POST",
+        }).then(refreshItems)
+        return false
+    }
+
+    function removeItem(item_id) {
+        fetch(`remove_item_button/${item_id}/`, {
+            method: "DELETE",
+        }).then(refreshItems)
+        return false
+    }
+
+    function closeModal() {
+        document.getElementById("form").reset()
+        return false
+    }
+
+    document.getElementById("button_add").onclick = addItem
+    document.getElementById("button_close").onclick = closeModal
+</script>
 {% endblock content %}

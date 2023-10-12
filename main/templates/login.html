@@ -5,174 +5,184 @@
 {% endblock meta %}
 
 {% block content %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Inventoreal</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+        <style>
+            body {
+                margin:0;
+                padding:0;
+                background-image: url("https://free4kwallpapers.com/uploads/originals/2015/10/22/sunset-anime-wallpaper.jpg");
+                background-size: 100% 100%;
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                font-family: Arial, sans-serif;
+                overflow-y: hidden;
+            }
+            .container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .isi {
+                width: 100%;
+                height: 100px;
+                display: flex;
+                justify-content: space-between;
+                font-size: 20px;
+            }
+            .brand {
+                display: flex;
+                flex-direction: row;
+                font-size: 40px;
+                padding: 40px 40px 40px 60px;
+                justify-content: center;
+                align-items: center;
+            }
+            .firstName {
+                color: rgb(95, 196, 95);
+            }
+            .secName {
+                color: white;
+            }
+            
+            .login-container {
+                margin-top: -50px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+            }
+            
+            .login {
+                background-color: rgba(255, 255, 255, 0.8);
+                border-radius: 5px;
+                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+                text-align: center;
+                padding: 30px;
+                width: 300px;
+            }
+            
+            .login h1 {
+                color: #333;
+                font-size: 24px;
+                margin-bottom: 20px;
+            }
+            
+            .form-group {
+                margin-bottom: 20px;
+                margin-left: 0;
+                margin-right: 25px;
+                text-align: left;
+            }
+            
+            .form-group label {
+                display: block;
+                font-weight: bold;
+                margin-bottom: 5px;
+                color: #555;
+            }
+            
+            .form-control {
+                width: 100%;
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+            }
+            
+            button {
+                justify-content: center;
+                text-align: center;
+                background-color: rgb(95, 196, 95);
+                border: none;
+                color: #fff;
+                display: flex;
+                padding: 10px 20px;
+                display: inline-block;
+                font-size: 15px;
+                margin: 4px 2px;
+                cursor: pointer;
+                border-radius: 5px;
+                text-decoration: none;
+            }
+            button:hover {
+                background-color: #fff;
+                color: rgb(95, 196, 95);
+                transition: all .3s ease-in-out;
+            }
+            
+            .message-list {
+                list-style: none;
+                padding: 0;
+                margin-top: 20px;
+            }
+            
+            .message-list li {
+                color: red;
+                font-size: 15px;
+                margin: 5px 0;
+            }
+            
+            .register-link {
+                margin-top: 20px;
+                font-size: 14px;
+            }
+            
+            .register-link a {
+                color: #007bff;
+                text-decoration: none;
+            }
+            .register-link a:hover {
+                text-decoration: underline;
+            }
+            
+        </style>
+    </head>
 
-<style>
-        body {
-            margin:0;
-            padding:0;
-            background-image: url("https://free4kwallpapers.com/uploads/originals/2015/10/22/sunset-anime-wallpaper.jpg");
-            background-size: 100% 100%;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            font-family: Arial, sans-serif;
-            overflow-y: hidden;
-        }
-        .container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .isi {
-            width: 100%;
-            height: 100px;
-            display: flex;
-            justify-content: space-between;
-            font-size: 20px;
-        }
-        .brand {
-            display: flex;
-            flex-direction: row;
-            font-size: 40px;
-            padding: 40px;
-            justify-content: center;
-            align-items: center;
-        }
-        .firstName {
-            color: green;
-        }
-        .secName {
-            color: white;
-        }
-    
-        .login-container {
-            margin-top: -50px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-    
-        .login {
-            background-color: rgba(255, 255, 255, 0.8);
-            border-radius: 5px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-            text-align: center;
-            padding: 30px;
-            width: 300px;
-        }
-    
-        .login h1 {
-            color: #333;
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
-    
-        .form-group {
-            margin-bottom: 20px;
-            margin-left: 0;
-            margin-right: 25px;
-            text-align: left;
-        }
-    
-        .form-group label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 5px;
-            color: #555;
-        }
-    
-        .form-control {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-    
-        button {
-            justify-content: center;
-            text-align: center;
-            background-color: rgb(95, 196, 95);
-            border: none;
-            color: #fff;
-            display: flex;
-            padding: 10px 20px;
-            display: inline-block;
-            font-size: 15px;
-            margin: 4px 2px;
-            cursor: pointer;
-            border-radius: 5px;
-            text-decoration: none;
-        }
-        button:hover {
-            background-color: #fff;
-            color: rgb(95, 196, 95);
-            transition: all .3s ease-in-out;
-        }
-    
-        .message-list {
-            list-style: none;
-            padding: 0;
-            margin-top: 20px;
-        }
-    
-        .message-list li {
-            color: red;
-            font-size: 15px;
-            margin: 5px 0;
-        }
-    
-        .register-link {
-            margin-top: 20px;
-            font-size: 14px;
-        }
-    
-        .register-link a {
-            color: #007bff;
-            text-decoration: none;
-        }
-        .register-link a:hover {
-            text-decoration: underline;
-        }
-</style>
-
-<div class="container">
-    <nav class="isi">
-        <div class="brand">
-            <div class="firstName">Invento</div>
-            <div class="secName">real</div>
-        </div>
-    </nav>
-</div>
-
-<div class="login-container">
-    <div class="login">
-        <h1>Login</h1>
-
-        <form method="POST" action="">
-            {% csrf_token %}
-            <div class="form-group">
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username" placeholder="Username" class="form-control">
+    <div class="container">
+        <nav class="isi">
+            <div class="brand">
+                <div class="firstName">Invento</div>
+                <div class="secName">real</div>
             </div>
-                    
-            <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" placeholder="Password" class="form-control">
-            </div>
-
-            <button class="btn login_btn" type="submit">Login</button>
-        </form>
-
-        {% if messages %}
-            <ul class="message-list">
-                {% for message in messages %}
-                    <li>{{ message }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}     
-
-        <p class="register-link">Don't have an account yet? <a href="{% url 'main:register' %}">Register Now</a></p>
+        </nav>
     </div>
-</div>
+
+    <div class="login-container">
+        <div class="login">
+            <h1>Login</h1>
+
+            <form method="POST" action="">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" placeholder="Username" class="form-control">
+                </div>
+                        
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" placeholder="Password" class="form-control">
+                </div>
+
+                <button class="btn login_btn" type="submit">Login</button>
+            </form>
+
+            {% if messages %}
+                <ul class="message-list">
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}     
+
+            <p class="register-link">Don't have an account yet? <a href="{% url 'main:register' %}">Register Now</a></p>
+        </div>
+    </div>
 
 {% endblock content %}
