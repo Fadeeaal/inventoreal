@@ -1,6 +1,5 @@
 # Inventoreal
-
-Tautan menuju aplikasi adaptable Inventoreal bisa diakses melalui [tautan ini](https://inventoreal.adaptable.app/).
+Tautan menuju website Inventoreal bisa diakses melalui [tautan ini](http://rakha-fadil-tugas.pbp.cs.ui.ac.id/).
 
 # Tugas 2
 ## **Cara membuat proyek Django baru**
