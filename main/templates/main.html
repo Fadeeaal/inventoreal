@@ -224,22 +224,25 @@
         </style>
     </head>
     <body>
-        <div class="container">
-            <nav class="isi">
-                <div class="brand">
-                    <div class="firstName">Invento</div>
-                    <div class="secName">real</div>
-                </div>
-                <div class="profile">
-                    Halo, {{ name }}!
-                    <a href="{% url 'main:logout' %}">
-                        <button class="logout-btn">
-                            Logout
-                        </button>
-                    </a>
-                </div>
-            </nav>
-        </div>
+        <nav class="navbar navbar-expand-lg" style="background-color: black;">
+            <div class="container-fluid">
+            <a class="navbar-brand" style="color: white;">InventoReal</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link disabled" aria-disabled="true" style="color :white;">Welcome, {{ name }}</a>
+                </li>
+                </ul>
+                <a href="{% url 'main:logout' %}">
+                <button class="btn btn-outline-success" type="submit">Logout</button><a/>
+            </div>
+            </div>
+        </nav>
+        <br></br>
+
 
         <h2>Product List</h2>
         <h4 id="itemCount"></h4> 

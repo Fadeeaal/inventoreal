@@ -16,39 +16,41 @@
     </nav>
 </div>
 
-<div class="login-container">
-    <div class="login">
-        <h1>Register</h1>
+<div class="container-fluid d-flex justify-content-center align-items-center" style="height: 80vh; background-image: url('https://free4kwallpapers.com/uploads/originals/2015/10/22/sunset-anime-wallpaper.jpg'); background-size: 100% 100%; background-repeat: no-repeat; background-attachment: fixed;">
 
-        <form method="POST">
-            {% csrf_token %}
-            <!-- Looping melalui setiap field dalam form -->
-            {% for field in form %}
-                <div class="form-group">
-                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-                    <td><input type="{{ field.field.widget.input_type }}" name="{{ field.name }}" id="{{ field.id_for_label }}" class="form-control"></td>
-
-                </div>
-                <!-- Menampilkan pesan kesalahan untuk field ini jika ada -->
-                {% if field.errors %}
-                    <ul class="message-list">
-                        {% for error in field.errors %}
-                            <li>{{ error }}</li>
-                        {% endfor %}
-                    </ul>
-                {% endif %}
-            {% endfor %}
-            <button type="submit">Register</button>
-        </form>
-
-        {% if messages %}
-            <ul class="message-list">
-                {% for message in messages %}
-                    <li>{{ message }}</li>
+    <div class="col-md-4">
+        <div class="card p-4" style="background-color: rgba(255, 255, 255, 0.8); border-radius: 5px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);">
+            <h1 class="text-center mb-4">Register</h1>
+            
+            <form method="POST">
+                {% csrf_token %}
+                <!-- Looping through each field in the form -->
+                {% for field in form %}
+                    <div class="form-group">
+                        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                        <input type="{{ field.field.widget.input_type }}" name="{{ field.name }}" id="{{ field.id_for_label }}" class="form-control">
+                    </div>
+                    <!-- Displaying error message for this field if any -->
+                    {% if field.errors %}
+                        <ul class="list-group mt-3">
+                            {% for error in field.errors %}
+                                <li class="list-group-item list-group-item-danger">{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
                 {% endfor %}
-            </ul>
-        {% endif %}  
-        <p class="register-link">Already have an account? <a href="{% url 'main:login' %}">Login</a></p>   
+                <button class="btn btn-success btn-block" type="submit">Register</button>
+            </form>
+
+            {% if messages %}
+                <ul class="list-group mt-3">
+                    {% for message in messages %}
+                        <li class="list-group-item list-group-item-danger">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}  
+            <p class="mt-4 text-center">Already have an account? <a href="{% url 'main:login' %}" class="text-primary">Login</a></p>
+        </div>
     </div>
 </div>
 

@@ -10,28 +10,58 @@
         <title>Inventoreal - Add</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="{% static 'create_product.css' %}">
+        <link rel="stylesheet" href="">
     </head>
     
-    <body>
-        <div class="container">
-            <nav class="isi">
-                <div class="brand">
-                    <div class="firstName">Invento</div>
-                    <div class="secName">real</div>
-                </div>
-            </nav>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary bg-primary" data-bs-theme="dark">
+        <div class="container-fluid">
+        <a class="navbar-brand" href="">InventoReal</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="">Home</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Feature
+                </a>
+                <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="create-product">Add Item</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+            </li>
+            </ul>
+            </form>
         </div>
-
-        <h2>Add New Product</h2>
-        <form method="POST">
-            {% csrf_token %}
-            <table>
-                {{ form.as_table }}
-            </table>
-            <input type="submit" value="Add Product"/>
-        </form>
-    </body>
+        </div>
+    </nav>
+    
+        <div class="container my-5">
+            <div class="col-md-6 mx-auto p-4 bg-white rounded">
+                <h2 class="text-success text-center mb-4">Add New Product</h2>
+                
+                <form method="POST">
+                    {% csrf_token %}
+                    
+                    {% for field in form %}
+                        <div class="form-group">
+                            <label class="text-dark">{{ field.label_tag }}</label>
+                            <input type="{{ field.field.widget.input_type }}" name="{{ field.name }}" class="form-control" value="{{ field.value }}" />
+                        </div>
+                    {% endfor %}
+    
+                    <div class="text-center">
+                        <input type="submit" value="Add Product" class="btn btn-success"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
 </html>
 
 {% endblock %}
