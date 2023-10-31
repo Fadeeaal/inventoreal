@@ -122,17 +122,19 @@ def remove_item_button(request, item_id):
     
     return HttpResponseNotFound()
 
-@csrf_exempt
 def edit_product(request, id):
-    if request.method == "POST" and request.is_ajax():
-        product = Item.objects.get(pk=id, user=request.user)
-        form = ProductForm(request.POST, instance=product)
-        if form.is_valid():
-            form.save()
-            return JsonResponse({'status': 'success'}, status=200)
-        else:
-            return JsonResponse({'status': 'error', 'errors': form.errors}, status=400)
-    return HttpResponseNotFound()
+    # Get Item berdasarkan ID
+    product = Item.objects.get(pk = id)
+    # Set product sebagai instance dari form
+    form = ProductForm(request.POST or None, instance=product)
+
+    if form.is_valid() and request.method == "POST":
+        # Simpan form dan kembali ke halaman awal
+        form.save()
+        return HttpResponseRedirect(reverse('main:show_main'))
+
+    context = {'form': form}
+    return render(request, "edit_product.html", context)
 
 
 def get_item_json(request):
