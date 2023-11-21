@@ -1,4 +1,5 @@
 import datetime
+import json
 from django.http import HttpResponse, HttpResponseNotFound
 from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
@@ -28,6 +29,7 @@ def show_main(request):
 
     return render(request, "main.html", context)
 
+@csrf_exempt
 def create_product(request):
     form = ProductForm(request.POST or None)
 
@@ -40,22 +42,27 @@ def create_product(request):
     context = {'form': form}
     return render(request, "create_product.html", context)
 
+@csrf_exempt
 def show_xml(request):
     data = Item.objects.all()
     return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
 
+@csrf_exempt
 def show_json(request):
     data = Item.objects.all()
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
 
+@csrf_exempt
 def show_xml_by_id(request, id):
     data = Item.objects.filter(pk=id)
     return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
 
+@csrf_exempt
 def show_json_by_id(request, id):
     data = Item.objects.filter(pk=id)
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
 
+@csrf_exempt
 def register(request):
     form = UserCreationForm()
     if request.method == "POST":
@@ -67,6 +74,7 @@ def register(request):
     context = {'form':form}
     return render(request, 'register.html', context)
 
+@csrf_exempt
 def login_user(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -83,6 +91,7 @@ def login_user(request):
     context = {}
     return render(request, 'login.html', context)
 
+@csrf_exempt
 def logout_user(request):
     logout(request)
     response = HttpResponseRedirect(reverse('main:login'))
@@ -122,6 +131,7 @@ def remove_item_button(request, item_id):
     
     return HttpResponseNotFound()
 
+@csrf_exempt
 def edit_product(request, id):
     # Get Item berdasarkan ID
     product = Item.objects.get(pk = id)
@@ -136,7 +146,7 @@ def edit_product(request, id):
     context = {'form': form}
     return render(request, "edit_product.html", context)
 
-
+@csrf_exempt
 def get_item_json(request):
     product_item = Item.objects.filter(user=request.user)
     return HttpResponse(serializers.serialize('json', product_item))
@@ -156,3 +166,24 @@ def add_item_ajax(request):
 
         return HttpResponse(b"CREATED", status=201)
     return HttpResponseNotFound()
+
+@csrf_exempt
+def create_product_flutter(request):
+    if request.method == 'POST':
+        
+        data = json.loads(request.body)
+
+        new_product = Item.objects.create(
+            user = request.user,
+            name = data["name"],
+            categories = data["categories"],
+            price = int(data["price"]),
+            amount = int(data["amount"]),
+            description = data["description"]
+        )
+
+        new_product.save()
+
+        return JsonResponse({"status": "success"}, status=200)
+    else:
+        return JsonResponse({"status": "error"}, status=401)
